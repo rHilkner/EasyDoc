@@ -1,0 +1,6 @@
+framework module Pods_EasyDoc {
+  umbrella header "Pods-EasyDoc-umbrella.h"
+
+  export *
+  module * { export * }
+}
