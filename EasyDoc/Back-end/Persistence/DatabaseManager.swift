@@ -34,7 +34,7 @@ class DatabaseManager {
             }
             
             // Returning created new main user on completionHandler
-            completionHandler(MainUser(email: email, documents: []), nil)
+            completionHandler(MainUser(autoID: userRef.key, email: email, documents: []), nil)
         }
     }
     
@@ -67,14 +67,14 @@ class DatabaseManager {
             let userSnapshot = usersSnapshotList[0]
             
             // Getting user's dictionary
-            guard let userDict = userSnapshot.value as? [String : AnyObject] else {
+            guard let userDict = userSnapshot.value as? [String : [String : Any]] else {
                 completionHandler(nil, EasyDocOfflineError.castingError)
                 return
             }
             
             // Parsing user's dictionary
-            guard let userFetched = ParseObjects.parseMainUserDictionary(userDict) else {
-                print("Could not parse user object from snapshot received from DB.")
+            guard let userFetched = ParseObjects.parseMainUserDictionary(userDict, autoID: userSnapshot.key) else {
+                print("-> WARNING: EasyDocParsingError.mainUser @ DatabaseManager.fetchMainUser()")
                 completionHandler(nil, EasyDocParsingError.mainUser)
                 return
             }
@@ -124,5 +124,32 @@ class DatabaseManager {
             // Return templates fetched
             completionHandler(templates, nil)
         }
+    }
+    
+    
+    // Adds a document to the main user's database
+    static func addDocumentToMainUserDB(document: Document, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        // Creating reference to user dictionary object on DB
+        let userRef = ref.child("users").child(AppShared.mainUser!.autoID).child("documents").childByAutoId()
+        
+        // Creating document dictionary
+        let documentDict = ParseObjects.createDocumentDictionary(document)
+        
+        // Adding dictionary to user's database
+        userRef.setValue(documentDict) {
+            (error, _) in
+            
+            if error != nil {
+                completionHandler(EasyDocQueryError.setValue)
+                return
+            }
+            
+            document.autoID = userRef.key
+            
+            // Returning created new main user on completionHandler
+            completionHandler(nil)
+        }
+        
     }
 }

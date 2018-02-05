@@ -75,7 +75,12 @@ class SettingsTableViewController: UITableViewController {
     func goToLoginScreen() {
         // TODO: check if there is a way to dismiss all the view controllers and leave only the login view controller
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        
+        guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
+            print("-> WARNING: EasyDocOfflineError.castingError @ SettingsTableViewController.goToLoginScreen()")
+            return
+        }
+        
         self.present(loginViewController, animated: true, completion: nil)
     }
     

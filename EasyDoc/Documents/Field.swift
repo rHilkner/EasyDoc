@@ -11,7 +11,7 @@ import Foundation
 class Field {
     
     let key: String
-    let value: Any
+    var value: Any
     let type: String
     let order: Int
     
@@ -20,20 +20,5 @@ class Field {
         self.value = value
         self.type = type
         self.order = order
-    }
-    
-    convenience init?(dictKey: String, dictValue: [String : Any]) {
-        
-        let key = dictKey
-        
-        guard let value = dictValue["value"],
-            let type = dictValue["type"] as? String,
-            let order = dictValue["order"] as? Int else {
-            
-            print("-> WARNING: EasyDocParsingError.field @ Field.init()")
-            return nil
-        }
-        
-        self.init(key: key, value: value, type: type, order: order)
     }
 }

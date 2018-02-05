@@ -10,25 +10,11 @@ import Foundation
 
 class ParseObjects {
     
-    /// Verifies if password given from login is correct.
-//    static func parsePassword(userDict: [String : AnyObject]) -> String? {
-//        // Parsing user profile information
-//        guard let profileDict = userDict["profile_information"] as? [String : AnyObject] else {
-//            return nil
-//        }
-//        
-//        // Parsing user's password
-//        guard let userPassword = profileDict["password"] as? String else {
-//            return nil
-//        }
-//        
-//        return userPassword
-//    }
-    
     /// Parse given dictionary to create main user object. Returns nil if parse gone wrong.
-    static func parseMainUserDictionary(_ userDict: [String : AnyObject]) -> MainUser? {
+    static func parseMainUserDictionary(_ userDict: [String : [String : Any]], autoID: String) -> MainUser? {
+        
         // Getting user's email
-        guard let profileDict = userDict["profile_information"] as? [String : AnyObject] else {
+        guard let profileDict = userDict["profile_information"] else {
             return nil
         }
         
@@ -39,14 +25,10 @@ class ParseObjects {
         // Getting user's documents
         var userDocuments: [Document] = []
         
-        let documentsDict = userDict["documents"] as? [String : AnyObject] ?? [:]
+        let documentsDict = userDict["documents"] as? [String : [String : Any]] ?? [:]
         
         for documentDict in documentsDict {
-            guard let documentObjectDict = documentDict.value as? [String : AnyObject] else {
-                return nil
-            }
-            
-            guard let document = self.parseDocumentDictionary(documentObjectDict) else {
+            guard let document = self.parseDocumentDictionary(documentDict.value, autoID: documentDict.key) else {
                 return nil
             }
             
@@ -54,12 +36,12 @@ class ParseObjects {
         }
         
         // Returns main user object
-        return MainUser(email: userEmail, documents: userDocuments)
+        return MainUser(autoID: autoID, email: userEmail, documents: userDocuments)
     }
     
     
     /// Parse given dictionary to create document object. Returns nil if parse gone wrong.
-    static func parseDocumentDictionary(_ documentDict: [String : AnyObject]) -> Document? {
+    static func parseDocumentDictionary(_ documentDict: [String : Any], autoID: String) -> Document? {
         // Getting document title
         guard let documentTitle = documentDict["title"] as? String else {
             return nil
@@ -71,7 +53,7 @@ class ParseObjects {
         }
         
         // Getting document contents
-        guard let documentContent = documentDict["content"] as? String else {
+        guard let documentContent = documentDict["contents"] as? String else {
             return nil
         }
         
@@ -93,7 +75,7 @@ class ParseObjects {
         let lastModified = Date(timeIntervalSince1970: documentTimestamp)
         
         // Returns document object
-        return Document(title: documentTitle, type: documentType, content: documentContent, fields: documentFields, lastModified: lastModified)
+        return Document(autoID: autoID, title: documentTitle, type: documentType, content: documentContent, fields: documentFields, lastModified: lastModified)
     }
     
     
@@ -191,17 +173,38 @@ class ParseObjects {
     
     
     /// Create document dictionary from given document object
-    static func createDocumentDictionary(_ document: Document) -> [String : AnyObject] {
+    static func createDocumentDictionary(_ document: Document) -> [String : Any] {
         // Creating document dictionary
-        let documentDict: [String : AnyObject] = [
-            "title": document.title as AnyObject,
-            "type": document.type as AnyObject,
-            "contents": document.content as AnyObject,
-            "fields": document.fields as AnyObject,
-            "last_modified": document.lastModified.timeIntervalSince1970 as AnyObject
+        let documentDict: [String : Any] = [
+            "title": document.title,
+            "type": document.type,
+            "contents": document.content,
+            "fields": createFieldsDictionary(document.fields),
+            "last_modified": document.lastModified.timeIntervalSince1970
         ]
         
         // Returns document dictionary
         return documentDict
+    }
+    
+    static func createFieldsDictionary(_ fields: [Field]) -> [String : [String : Any]] {
+        // Creating field dictionary
+        var fieldsDict: [String : [String : Any]] = [:]
+        
+        for field in fields {
+            fieldsDict[field.key] = [
+                "type": field.type,
+                "order": field.order
+            ]
+            
+            if field.type == "dict" {
+                fieldsDict[field.key]!["value"] = self.createFieldsDictionary(field.value as! [Field])
+            } else {
+                fieldsDict[field.key]!["value"] = field.value
+            }
+        }
+        
+        // Returns fields dictionary
+        return fieldsDict
     }
 }

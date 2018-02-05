@@ -25,8 +25,6 @@ class FetchingServices {
                 return
             }
             
-            
-            
             guard AuthServices.performInAppLogin(mainUser: mainUser!) else {
                 AppShared.isLoadingUser.value = false
                 completionHandler(EasyDocOfflineError.inAppLoginError)

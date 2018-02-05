@@ -10,8 +10,11 @@ import Foundation
 
 extension Date {
     
-    /// Returns string of the date in the format: "yyyy-MM-dd HH:mm:ss"
+    /// Returns string of the date in the format: "HH:mm - dd/MM/yyyy"
     func toString() -> String {
-        return DateFormatter().string(from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm - dd/MM/yyyy"
+        
+        return dateFormatter.string(from: self)
     }
 }

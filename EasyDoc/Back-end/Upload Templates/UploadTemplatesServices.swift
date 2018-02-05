@@ -77,7 +77,7 @@ class UploadTemplatesServices {
     
     
     /// Sends all dictionaries in this class to the database
-    static func sendAllTemplatesToDB(completionHandler: @escaping (EasyDocError?) -> Void) {
+    static func sendAllTemplatesToDB() {
         
         // Creating dispatch group to notify when all templates are sent to DB
         let dispatchGroup = DispatchGroup()
@@ -86,10 +86,10 @@ class UploadTemplatesServices {
         
         // Sending "Contrato de Locação Imobiliária" to database
         self.sendTemplateToDB(id: "Locação Imobiliária", templateDict: self.getLocacaoImobiliariaDict()) {
-            _error in
+            error in
             
-            if let error = _error {
-                completionHandler(error)
+            if error != nil {
+                print("-> BIG WARNING: Uploading templates to database failed.")
                 return
             }
             
@@ -98,7 +98,7 @@ class UploadTemplatesServices {
         
         // Calling completionHandler after all templates are sent to DB
         dispatchGroup.notify(queue: .main) {
-            completionHandler(nil)
+            print("-> BIG SUCCESS: Uploading templates to database succeeded.")
         }
     }
     

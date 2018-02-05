@@ -16,21 +16,12 @@ class DocumentsViewController: UIViewController {
     
     var documents: [Document] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // Uncomment lines below to send all templates in UploadTemplatesServices to EasyDoc's Firebase Database
-//        UploadTemplatesServices.sendAllTemplatesToDB() {
-//            uploadError in
-//            
-//            if uploadError != nil {
-//                print("-> BIG WARNING: Uploading templates to database failed.")
-//                return
-//            }
-//
-//            print("-> BIG SUCCESS: Uploading templates to database succeeded.")
-//        }
-//        return
+        //        UploadTemplatesServices.sendAllTemplatesToDB()
+        //        return
         
         
         // Verifying if user object is still being loaded
@@ -42,6 +33,10 @@ class DocumentsViewController: UIViewController {
         
         // Loading view controller
         self.loadViewController()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     
@@ -89,6 +84,8 @@ class DocumentsViewController: UIViewController {
         // Setting table view
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.tableView.reloadData()
     }
     
     
@@ -109,7 +106,7 @@ class DocumentsViewController: UIViewController {
                     return
                 }
                 
-                guard let segueDestination = segue.destination as? DocumentViewController else {
+                guard let segueDestination = segue.destination as? DocumentTableViewController else {
                     print("-> WARNING: EasyDocOfflineError.castingError @ DocumentsViewController.prepare(for segue)")
                     return
                 }
@@ -154,8 +151,8 @@ extension DocumentsViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //Choose custom row height
         return 80
     }

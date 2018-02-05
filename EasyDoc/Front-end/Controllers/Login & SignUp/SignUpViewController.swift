@@ -62,7 +62,7 @@ class SignUpViewController: UIViewController {
         AuthServices.attemptToSignUp(email: emailTextField.text!, password: passwordTextField.text!) {
             (signUpError) in
             
-            if let error = signUpError {
+            if signUpError != nil {
                 self.signUpButton.isEnabled = true
                 return
             }
