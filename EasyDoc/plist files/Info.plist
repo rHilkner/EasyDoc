@@ -43,5 +43,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Calibri.ttf</string>
+		<string>Calibri B.ttf</string>
+		<string>Calibri I.ttf</string>
+		<string>Calibri Z.ttf</string>
+		<string>Champagne &amp; Limousines.ttf</string>
+		<string>Champagne &amp; Limousines B.ttf</string>
+		<string>Champagne &amp; Limousines I.ttf</string>
+		<string>Champagne &amp; Limousines Z.ttf</string>
+	</array>
 </dict>
 </plist>

@@ -29,6 +29,14 @@
 		C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480199201F94910099F872 /* DocumentTableViewController.swift */; };
 		C648019C201F98840099F872 /* FetchingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019B201F98840099F872 /* FetchingServices.swift */; };
 		C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019F201FA5550099F872 /* TemplatesViewController.swift */; };
+		C67EDC4C2029F01A00A64BCE /* Calibri Z.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC432029F01900A64BCE /* Calibri Z.TTF */; };
+		C67EDC4D2029F01A00A64BCE /* Calibri I.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC442029F01900A64BCE /* Calibri I.TTF */; };
+		C67EDC4E2029F01A00A64BCE /* Calibri B.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC452029F01900A64BCE /* Calibri B.TTF */; };
+		C67EDC4F2029F01A00A64BCE /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC462029F01900A64BCE /* Calibri.ttf */; };
+		C67EDC502029F01A00A64BCE /* Champagne & Limousines I.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC482029F01900A64BCE /* Champagne & Limousines I.ttf */; };
+		C67EDC512029F01A00A64BCE /* Champagne & Limousines Z.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC492029F01900A64BCE /* Champagne & Limousines Z.ttf */; };
+		C67EDC522029F01A00A64BCE /* Champagne & Limousines B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC4A2029F01900A64BCE /* Champagne & Limousines B.ttf */; };
+		C67EDC532029F01A00A64BCE /* Champagne & Limousines.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC4B2029F01900A64BCE /* Champagne & Limousines.ttf */; };
 		C694858D201AC13700357129 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C694858C201AC13700357129 /* GoogleService-Info.plist */; };
 		C6948590201B967000357129 /* EasyDocAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694858F201B967000357129 /* EasyDocAuthError.swift */; };
 		C6948592201BAB0100357129 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948591201BAB0100357129 /* ErrorHandling.swift */; };
@@ -78,6 +86,14 @@
 		C6480199201F94910099F872 /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
 		C648019B201F98840099F872 /* FetchingServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingServices.swift; sourceTree = "<group>"; };
 		C648019F201FA5550099F872 /* TemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesViewController.swift; sourceTree = "<group>"; };
+		C67EDC432029F01900A64BCE /* Calibri Z.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Z.TTF"; sourceTree = "<group>"; };
+		C67EDC442029F01900A64BCE /* Calibri I.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri I.TTF"; sourceTree = "<group>"; };
+		C67EDC452029F01900A64BCE /* Calibri B.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri B.TTF"; sourceTree = "<group>"; };
+		C67EDC462029F01900A64BCE /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
+		C67EDC482029F01900A64BCE /* Champagne & Limousines I.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines I.ttf"; sourceTree = "<group>"; };
+		C67EDC492029F01900A64BCE /* Champagne & Limousines Z.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Z.ttf"; sourceTree = "<group>"; };
+		C67EDC4A2029F01900A64BCE /* Champagne & Limousines B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines B.ttf"; sourceTree = "<group>"; };
+		C67EDC4B2029F01900A64BCE /* Champagne & Limousines.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines.ttf"; sourceTree = "<group>"; };
 		C694858C201AC13700357129 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C694858F201B967000357129 /* EasyDocAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocAuthError.swift; sourceTree = "<group>"; };
 		C6948591201BAB0100357129 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
@@ -193,6 +209,28 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		C67EDC422029F01900A64BCE /* calibri */ = {
+			isa = PBXGroup;
+			children = (
+				C67EDC432029F01900A64BCE /* Calibri Z.TTF */,
+				C67EDC442029F01900A64BCE /* Calibri I.TTF */,
+				C67EDC452029F01900A64BCE /* Calibri B.TTF */,
+				C67EDC462029F01900A64BCE /* Calibri.ttf */,
+			);
+			path = calibri;
+			sourceTree = "<group>";
+		};
+		C67EDC472029F01900A64BCE /* champagne_limousines */ = {
+			isa = PBXGroup;
+			children = (
+				C67EDC482029F01900A64BCE /* Champagne & Limousines I.ttf */,
+				C67EDC492029F01900A64BCE /* Champagne & Limousines Z.ttf */,
+				C67EDC4A2029F01900A64BCE /* Champagne & Limousines B.ttf */,
+				C67EDC4B2029F01900A64BCE /* Champagne & Limousines.ttf */,
+			);
+			path = champagne_limousines;
+			sourceTree = "<group>";
+		};
 		C694858E201AC14400357129 /* plist files */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +290,8 @@
 		C6E8EDA82016E5180075B729 /* EasyDoc */ = {
 			isa = PBXGroup;
 			children = (
+				C67EDC422029F01900A64BCE /* calibri */,
+				C67EDC472029F01900A64BCE /* champagne_limousines */,
 				C694858E201AC14400357129 /* plist files */,
 				C6E8EDC72017CFE10075B729 /* Notes */,
 				C6FABAFC2018FBDE0068C6ED /* AppShared */,
@@ -448,9 +488,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C67EDC522029F01A00A64BCE /* Champagne & Limousines B.ttf in Resources */,
 				C6E8EDB42016E5180075B729 /* LaunchScreen.storyboard in Resources */,
+				C67EDC4E2029F01A00A64BCE /* Calibri B.TTF in Resources */,
 				C694858D201AC13700357129 /* GoogleService-Info.plist in Resources */,
+				C67EDC502029F01A00A64BCE /* Champagne & Limousines I.ttf in Resources */,
 				C6E8EDB12016E5180075B729 /* Assets.xcassets in Resources */,
+				C67EDC4C2029F01A00A64BCE /* Calibri Z.TTF in Resources */,
+				C67EDC512029F01A00A64BCE /* Champagne & Limousines Z.ttf in Resources */,
+				C67EDC532029F01A00A64BCE /* Champagne & Limousines.ttf in Resources */,
+				C67EDC4F2029F01A00A64BCE /* Calibri.ttf in Resources */,
+				C67EDC4D2029F01A00A64BCE /* Calibri I.TTF in Resources */,
 				C6E8EDAF2016E5180075B729 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

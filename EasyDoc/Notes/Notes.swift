@@ -11,7 +11,6 @@
  
  TODO
     - Incluir fontes: Calibri (textos telas login e cadastro) e Champagne & Limousine (texto logo)
-    - Present loading indicator (Documents/Templates VC)
     - [TENSO] Montar módulo da tela de visualização do contrato
  
  
