@@ -14,11 +14,13 @@ class Field {
     var value: Any
     let type: String
     let order: Int
+    let path: String
     
-    init(key: String, value: Any, type: String, order: Int) {
+    init(key: String, value: Any, type: String, order: Int, path: String) {
         self.key = key
         self.value = value
         self.type = type
         self.order = order
+        self.path = path
     }
 }

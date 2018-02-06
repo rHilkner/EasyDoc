@@ -11,6 +11,7 @@ import UIKit
 class TemplateTableViewController: UITableViewController {
 
     var template: Template?
+    var pathToSave: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -274,6 +275,8 @@ extension TemplateTableViewController {
         }
         
         templateFieldTableViewController.field = field
+        templateFieldTableViewController.pathToSave = field.key
+        
         self.navigationController?.pushViewController(templateFieldTableViewController, animated: true)
     }
     
@@ -287,15 +290,16 @@ extension TemplateTableViewController {
         alert.addTextField {
             (textField) in
 
+            textField.autocapitalizationType = .sentences
             textField.placeholder = "Título do documento"
         }
 
-        // Grabbing the value from the text field when the user clicks OK
-        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+        // Grabbing the value from the text field and saving the new document to the database and in-app when the user clicks OK
+        let addDocumentAction = UIAlertAction(title: "OK", style: .default) {
             _ in
-
+            
             let text = alert.textFields![0].text // Force unwrapping because we know it exists
-
+            
             guard let documentTitle = text, documentTitle != "" else {
                 print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentTableViewController.openFillingFieldAlert()")
                 return
@@ -306,14 +310,15 @@ extension TemplateTableViewController {
                 addingError in
                 
                 if addingError != nil {
-                    // TODO: pegar erro de 'título ja utilizado'
                     self.handlesAddingDocumentError()
                     return
                 }
                 
                 self.handlesAddingDocumentSuccess()
             }
-        })
+        }
+        
+        alert.addAction(addDocumentAction)
 
         // Presenting the alert
         self.present(alert, animated: true, completion: nil)
@@ -325,6 +330,7 @@ extension TemplateTableViewController {
     
     /// Handles template nil error and present it to user.
     func handlesTemplateNilError() {
+        
         // Reloading templates completely
         FetchingServices.loadTemplates() {
             (fetchingError) in

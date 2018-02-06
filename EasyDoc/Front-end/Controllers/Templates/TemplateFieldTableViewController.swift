@@ -11,6 +11,7 @@ import UIKit
 class TemplateFieldTableViewController: UITableViewController {
     
     var field: Field?
+    var pathToSave: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +205,8 @@ extension TemplateFieldTableViewController {
         }
         
         templateFieldTableViewController.field = field
+        templateFieldTableViewController.pathToSave = self.pathToSave! + "/" + field.key
+        
         self.present(templateFieldTableViewController, animated: true, completion: nil)
     }
 }

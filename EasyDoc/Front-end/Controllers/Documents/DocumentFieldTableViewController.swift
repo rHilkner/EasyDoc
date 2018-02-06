@@ -11,6 +11,7 @@ import UIKit
 class DocumentFieldTableViewController: UITableViewController {
     
     var field: Field?
+    var pathToSave: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +90,7 @@ extension DocumentFieldTableViewController {
             // Verifying which type of cell we need to cast
             if cellField.type == "dict" {
                 guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDisclosure") as? DocumentDisclosureTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt)")
+                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt) -1")
                     return UITableViewCell()
                 }
                 
@@ -98,8 +99,8 @@ extension DocumentFieldTableViewController {
                 return cell
                 
             } else {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDetail") as? DocumentDetailTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt)")
+                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDetail") as? DocumentDetailTableViewCell else {
+                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt) -2")
                     return UITableViewCell()
                 }
                 
@@ -136,7 +137,7 @@ extension DocumentFieldTableViewController {
             return cell
             
         } else {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDetail") as? DocumentDetailTableViewCell else {
+            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDetail") as? DocumentDetailTableViewCell else {
                 print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt)")
                 return UITableViewCell()
             }
@@ -236,6 +237,8 @@ extension DocumentFieldTableViewController {
         }
         
         documentFieldTableViewController.field = field
+        documentFieldTableViewController.pathToSave = self.pathToSave! + "/" + field.key
+        
         self.present(documentFieldTableViewController, animated: true, completion: nil)
     }
     
@@ -249,11 +252,13 @@ extension DocumentFieldTableViewController {
         alert.addTextField {
             (textField) in
             
+            textField.autocapitalizationType = .sentences
             textField.placeholder = field.key
+            textField.text = (field.value as! String)
         }
         
         // Grabbing the value from the text field when the user clicks OK
-        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+        let settingValueAction = UIAlertAction(title: "OK", style: .default) {
             _ in
             
             let textField = alert.textFields![0] // Force unwrapping because we know it exists
@@ -263,11 +268,37 @@ extension DocumentFieldTableViewController {
                 return
             }
             
-            field.value = text
-            self.tableView.reloadData()
-        })
+            DocumentServices.setValueToField(field: field, value: text) {
+                error in
+                
+                if error != nil {
+                    self.handleSettingValueError()
+                    return
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+        alert.addAction(settingValueAction)
         
         // Presenting the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+
+extension DocumentFieldTableViewController {
+    
+    /// Handles setting value error and presents it to the user
+    func handleSettingValueError() {
+        
+        // Creating and presenting alert
+        let alert = UIAlertController(title: "Erro ao definir valor", message: "Verifique sua conexão com a internet e tente novamente.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+        
+        alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
 }

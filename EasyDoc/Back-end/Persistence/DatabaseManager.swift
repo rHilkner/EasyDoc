@@ -112,7 +112,7 @@ class DatabaseManager {
                 }
                 
                 // Parsing template object
-                guard let templateObject = ParseObjects.parseTemplateDictionary(templateDict) else {
+                guard let templateObject = ParseObjects.parseTemplateDictionary(templateDict, autoID: templateSnapshot.key) else {
                     completionHandler(nil, EasyDocParsingError.template)
                     return
                 }
@@ -151,5 +151,62 @@ class DatabaseManager {
             completionHandler(nil)
         }
         
+    }
+    
+    /// Sets value to field of given path in the database
+    static func setValueToField(path: String, value: Any, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        let valueRef = self.ref.child("users/\(AppShared.mainUser!.autoID)/documents/" + path)
+        
+        valueRef.setValue(value) {
+            (error, _) in
+            
+            if error != nil {
+                print("-> WARNING: EasyDocQueryError.setValue @ DatabaseManager.setValueToField()")
+                completionHandler(EasyDocQueryError.setValue)
+                return
+            }
+            
+            completionHandler(nil)
+        }
+        
+    }
+    
+    
+    /// Sets title to given document in the database
+    static func setTitleToDocument(path: String, title: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        let titleRef = self.ref.child("users/\(AppShared.mainUser!.autoID)/documents/" + path)
+        
+        titleRef.setValue(title) {
+            (error, _) in
+            
+            if error != nil {
+                print("-> WARNING: EasyDocQueryError.setValue @ DatabaseManager.setValueToField()")
+                completionHandler(EasyDocQueryError.setValue)
+                return
+            }
+            
+            completionHandler(nil)
+        }
+    }
+    
+    
+    /// Deletes a document from the user's database
+    static func deleteDocument(autoID: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        let documentRef = self.ref.child("users/\(AppShared.mainUser!.autoID)/documents/" + autoID)
+        
+        documentRef.removeValue() {
+            error, _ in
+            
+            if error != nil {
+                print("-> WARNING: EasyDocQueryError.removeValue @ DatabaseManager.deleteDocument()")
+                completionHandler(EasyDocQueryError.removeValue)
+                return
+            }
+            
+            completionHandler(nil)
+        }
     }
 }

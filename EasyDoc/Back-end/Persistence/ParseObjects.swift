@@ -63,7 +63,9 @@ class ParseObjects {
         }
         
         // Getting template fields
-        guard let documentFields = self.parseFields(_documentFields) else {
+        let path = autoID + "/fields"
+        
+        guard let documentFields = self.parseFields(_documentFields, path: path) else {
             return nil
         }
         
@@ -80,7 +82,7 @@ class ParseObjects {
     
     
     /// Parse given dictionary to create template object. Returns nil if parse gone wrong.
-    static func parseTemplateDictionary(_ templateDict: [String : Any]) -> Template? {
+    static func parseTemplateDictionary(_ templateDict: [String : Any], autoID: String) -> Template? {
         
         // Getting template type
         guard let templateType = templateDict["type"] as? String else {
@@ -98,7 +100,9 @@ class ParseObjects {
         }
         
         // Getting template fields
-        guard let templateFields = self.parseFields(_templateFields) else {
+        let path = autoID + "/fields"
+        
+        guard let templateFields = self.parseFields(_templateFields, path: path) else {
             return Template(type: templateType, content: templateContent, fields: [])
         }
         
@@ -107,7 +111,7 @@ class ParseObjects {
     
     
     /// Parse given dictionary of fields an array of fields of fields.
-    static func parseFields(_ fieldsDict: [String : [String : Any]]) -> [Field]? {
+    static func parseFields(_ fieldsDict: [String : [String : Any]], path: String) -> [Field]? {
         var fields = [Field?](repeating: nil, count: fieldsDict.count)
         
         // Parsing each field
@@ -115,6 +119,7 @@ class ParseObjects {
             
             // Reading field's key, type and order
             let key = fieldDict.key
+            let fieldPath = path + "/" + key + "/value"
             
             guard let type = fieldDict.value["type"] as? String,
                   let order = fieldDict.value["order"] as? Int else {
@@ -133,18 +138,18 @@ class ParseObjects {
                     return nil
                 }
                 
-                guard let value = self.parseFields(valueDict) else {
+                guard let value = self.parseFields(valueDict, path: fieldPath) else {
                     return nil
                 }
                 
-                fields[order] = Field(key: key, value: value, type: type, order: order)
+                fields[order] = Field(key: key, value: value, type: type, order: order, path: fieldPath)
                 
             } else {
                 guard let value = fieldDict.value["value"] else {
                     return nil
                 }
                 
-                fields[order] = Field(key: key, value: value, type: type, order: order)
+                fields[order] = Field(key: key, value: value, type: type, order: order, path: fieldPath)
             }
             
         }

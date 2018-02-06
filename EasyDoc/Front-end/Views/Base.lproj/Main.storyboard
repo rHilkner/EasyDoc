@@ -526,7 +526,6 @@ nenhum documento.</string>
                     </view>
                     <navigationItem key="navigationItem" title="Documentos" id="8wS-hQ-F3B">
                         <barButtonItem key="backBarButtonItem" title=" " id="FId-9E-lAa"/>
-                        <barButtonItem key="leftBarButtonItem" title="Editar" id="cu7-0O-JvG"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1Lg-Mz-Lhn">
                             <connections>
                                 <segue destination="oUs-bp-vyE" kind="show" id="8rS-jC-0ow"/>
@@ -609,7 +608,12 @@ nenhum documento.</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Título do Documento" largeTitleDisplayMode="never" id="h5p-gN-W3B">
-                        <barButtonItem key="rightBarButtonItem" title="Editar" id="MIh-fw-5Vi"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="x8Z-Ld-97e"/>
+                        <barButtonItem key="rightBarButtonItem" title="Editar" id="MIh-fw-5Vi">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="obz-Hw-IuA" id="GBf-JF-aBt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1u-qU-nkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -640,7 +644,7 @@ nenhum documento.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TemplateCellWithDisclosure" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TemplateCellWithDisclosure" textLabel="K5F-g1-ULV" style="IBUITableViewCellStyleDefault" id="Enk-7L-Esz" customClass="DocumentDisclosureTableViewCell" customModule="EasyDoc" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DocumentCellWithDisclosure" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DocumentCellWithDisclosure" textLabel="K5F-g1-ULV" style="IBUITableViewCellStyleDefault" id="Enk-7L-Esz" customClass="DocumentDisclosureTableViewCell" customModule="EasyDoc" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Enk-7L-Esz" id="FZ2-E2-sJF">
@@ -661,7 +665,7 @@ nenhum documento.</string>
                                     <outlet property="titleLabel" destination="K5F-g1-ULV" id="IEm-Jp-86H"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TemplateCellWithDetail" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TemplateCellWithDetail" textLabel="QA4-1q-bvP" detailTextLabel="Z2a-6R-18b" rowHeight="44" style="IBUITableViewCellStyleValue1" id="ScL-FQ-3pA" customClass="DocumentDetailTableViewCell" customModule="EasyDoc" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DocumentCellWithDetail" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DocumentCellWithDetail" textLabel="QA4-1q-bvP" detailTextLabel="Z2a-6R-18b" rowHeight="44" style="IBUITableViewCellStyleValue1" id="ScL-FQ-3pA" customClass="DocumentDetailTableViewCell" customModule="EasyDoc" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ScL-FQ-3pA" id="jLI-db-qKf">

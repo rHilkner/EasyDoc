@@ -15,6 +15,7 @@ class DocumentsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var documents: [Document] = []
+    var loadingIndicatorAlert: UIAlertController?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,14 +73,13 @@ class DocumentsViewController: UIViewController {
         }
         
         // Getting user's documents
-        if mainUser.documents.count == 0 {
-            self.noDocumentsDisclaimer.isHidden = false
-            return
-        }
-        
         self.documents = mainUser.documents
         
-        self.noDocumentsDisclaimer.isHidden = true
+        if self.documents.count == 0 {
+            self.noDocumentsDisclaimer.isHidden = false
+        } else {
+            self.noDocumentsDisclaimer.isHidden = true
+        }
         
         // Setting table view
         self.tableView.delegate = self
@@ -156,6 +156,30 @@ extension DocumentsViewController: UITableViewDataSource {
         //Choose custom row height
         return 80
     }
+    
+    
+    // Makes all cells editable
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    // Handling options of cell swipe
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            DocumentServices.deleteDocument(autoID: self.documents[indexPath.row].autoID!) {
+                error in
+                
+                if error != nil {
+                    print("-> WARNING: EasyDocQueryError.removeValue @ DocumentsViewController.tableView()")
+                    self.handleUnsuccessfullDelete()
+                    return
+                }
+                
+                self.loadViewController()
+            }
+        }
+    }
 }
     
 extension DocumentsViewController: UITableViewDelegate {
@@ -180,12 +204,45 @@ extension DocumentsViewController: IsLoadingUserDelegate {
     
     /// Presents view with loading indicator
     func presentLoadingIndicator() {
-        print("User object loading.")
+        
+        // Creating alert
+        self.loadingIndicatorAlert = UIAlertController(title: "Carregando...", message: nil, preferredStyle: .alert)
+
+        // Adding loading indicator
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating()
+
+        self.loadingIndicatorAlert!.view.addSubview(loadingIndicator)
+        
+        // Presenting the alert
+        present(self.loadingIndicatorAlert!, animated: true, completion: nil)
     }
     
     
     /// Dismisses view with loading indicator
     func dismissLoadingIndicator() {
-        print("User object loading ended.")
+        
+        // Dismissing loading indicator
+        if self.loadingIndicatorAlert != nil {
+            self.loadingIndicatorAlert!.dismiss(animated: false, completion: nil)
+            self.loadingIndicatorAlert = nil
+        }
+    }
+}
+
+
+extension DocumentsViewController {
+    
+    /// Called when deleting a documents returns an error. Presents an alert to inform the user the deletion was unsuccessful.
+    func handleUnsuccessfullDelete() {
+        // Creating and presenting alert
+        let alert = UIAlertController(title: "Erro ao deletar documento", message: "Verifique sua conexão com a internet e tente novamente.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

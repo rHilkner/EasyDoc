@@ -13,6 +13,7 @@ class TemplatesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var templates: [Template] = []
+    var loadingIndicatorAlert: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,12 +156,30 @@ extension TemplatesViewController: IsLoadingTemplatesDelegate {
     
     /// Presents view with loading indicator
     func presentLoadingIndicator() {
-        print("Templates object loading.")
+        
+        // Creating alert
+        self.loadingIndicatorAlert = UIAlertController(title: nil, message: "Carregando...", preferredStyle: .alert)
+        
+        // Adding loading indicator
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating()
+        
+        self.loadingIndicatorAlert!.view.addSubview(loadingIndicator)
+        
+        // Presenting the alert
+        present(self.loadingIndicatorAlert!, animated: true, completion: nil)
     }
     
     
     /// Dismisses view with loading indicator
     func dismissLoadingIndicator() {
-        print("Templates object loading ended.")
+        
+        // Dismissing loading indicator
+        if self.loadingIndicatorAlert != nil {
+            self.loadingIndicatorAlert!.dismiss(animated: false, completion: nil)
+            self.loadingIndicatorAlert = nil
+        }
     }
 }

@@ -56,4 +56,72 @@ class DocumentServices {
             completionHandler(nil)
         }
     }
+    
+    
+    /// Sets value to field of given path in the database and in-app
+    static func setValueToField(field: Field, value: Any, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        // Trying to save value to database
+        DatabaseManager.setValueToField(path: field.path, value: value) {
+            setValueError in
+            
+            if let error = setValueError {
+                print("-> WARNING: EasyDocQueryError.setValue @ DocumentServices.setValueToField()")
+                completionHandler(error)
+                return
+            }
+            
+            // In case of success set value in-app
+            field.value = value
+            
+            completionHandler(nil)
+        }
+    }
+    
+    
+    /// Sets title of given document in the database and in-app
+    static func setTitleToDocument(document: Document, title: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        // Trying to save title to database
+        DatabaseManager.setTitleToDocument(path: document.autoID! + "/title", title: title) {
+            setValueError in
+            
+            if let error = setValueError {
+                print("-> WARNING: EasyDocQueryError.setValue @ DocumentServices.setValueToField()")
+                completionHandler(error)
+                return
+            }
+            
+            // In case of success set title in-app
+            document.title = title
+            
+            completionHandler(nil)
+        }
+    }
+    
+    
+    /// Deletes a document from the user's database and in-app
+    static func deleteDocument(autoID: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
+        // Deleting the document from the database
+        DatabaseManager.deleteDocument(autoID: autoID) {
+            _error in
+            
+            if let error = _error {
+                print("-> WARNING: EasyDocQueryError.removeValue @ DocumentServices.deleteDocument()")
+                completionHandler(error)
+                return
+            }
+            
+            // Deleting the document in-app
+            for i in 0 ..< AppShared.mainUser!.documents.count {
+                
+                if AppShared.mainUser!.documents[i].autoID == autoID {
+                    AppShared.mainUser!.documents.remove(at: i)
+                }
+            }
+            
+            completionHandler(nil)
+        }
+    }
 }

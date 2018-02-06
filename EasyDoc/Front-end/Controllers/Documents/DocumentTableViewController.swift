@@ -31,6 +31,29 @@ class DocumentTableViewController: UITableViewController {
     func loadViewController() {
         self.navigationItem.title = self.document!.title
     }
+    
+    
+    @IBAction func editButtonPressed(_ sender: Any) {
+        // Creating alert
+        let renameAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        // Creating renaming action
+        let renameAction = UIAlertAction(title: "Renomear documento", style: .default) {
+            _ in
+            
+            self.presentRenameAlert()
+        }
+        
+        // Creating cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        
+        renameAlert.addAction(renameAction)
+        renameAlert.addAction(cancelAction)
+        
+        // Presenting alert
+        self.present(renameAlert, animated: true, completion: nil)
+    }
 }
 
 
@@ -246,13 +269,13 @@ extension DocumentTableViewController {
     func goToDocumentContentsViewController() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        guard let documentContentViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentContentsViewController") as? DocumentContentsViewController else {
+        guard let documentContentsViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentContentsViewController") as? DocumentContentsViewController else {
             print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.goToDocumentContentsViewController()")
             return
         }
         
-        documentContentViewController.document = self.document
-        self.navigationController?.pushViewController(documentContentViewController, animated: true)
+        documentContentsViewController.document = self.document
+        self.navigationController?.pushViewController(documentContentsViewController, animated: true)
     }
     
     
@@ -266,11 +289,60 @@ extension DocumentTableViewController {
         }
         
         documentFieldTableViewController.field = field
+            
         self.navigationController?.pushViewController(documentFieldTableViewController, animated: true)
     }
     
     
-    /// Presents an alert with a textfield for the user to input the value of the determined field
+    /// Presents alert for renaming document's title
+    func presentRenameAlert() {
+        // Creating the alert controller
+        let alert = UIAlertController(title: "Insira o novo título do documento.", message: nil, preferredStyle: .alert)
+        
+        // Adding the text field
+        alert.addTextField {
+            (textField) in
+            
+            textField.autocapitalizationType = .sentences
+            textField.placeholder = "Título do documento"
+            textField.text = self.document!.title
+        }
+        
+        // Grabbing the value from the text field when the user clicks OK
+        let setValueAction = UIAlertAction(title: "OK", style: .default) {
+            _ in
+            
+            let textField = alert.textFields![0] // Force unwrapping because we know it exists
+            
+            guard let text = textField.text, text != "" else {
+                print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentTableViewController.presentRenameAlert()")
+                return
+            }
+            
+            DocumentServices.setTitleToDocument(document: self.document!, title: text) {                error in
+                
+                if error != nil {
+                    self.handleSettingValueError()
+                    return
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+        // Creating cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        // Adding actions
+        alert.addAction(cancelAction)
+        alert.addAction(setValueAction)
+        
+        // Presenting the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    /// Opens alert for filling the field's value
     func openFillingFieldAlert(field: Field) {
         // Creating the alert controller
         let alert = UIAlertController(title: field.key, message: "Insira o valor abaixo", preferredStyle: .alert)
@@ -279,11 +351,13 @@ extension DocumentTableViewController {
         alert.addTextField {
             (textField) in
             
+            textField.autocapitalizationType = .sentences
             textField.placeholder = field.key
+            textField.text = (field.value as! String)
         }
         
         // Grabbing the value from the text field when the user clicks OK
-        alert.addAction(UIAlertAction(title: "OK", style: .default) {
+        let settingValueAction = UIAlertAction(title: "OK", style: .default) {
             _ in
             
             let textField = alert.textFields![0] // Force unwrapping because we know it exists
@@ -293,9 +367,24 @@ extension DocumentTableViewController {
                 return
             }
             
-            field.value = text
-            self.tableView.reloadData()
-        })
+            DocumentServices.setValueToField(field: field, value: text) {
+                error in
+                
+                if error != nil {
+                    self.handleSettingValueError()
+                    return
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+        // Creating cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        // Adding actions
+        alert.addAction(cancelAction)
+        alert.addAction(settingValueAction)
         
         // Presenting the alert
         self.present(alert, animated: true, completion: nil)
@@ -326,6 +415,19 @@ extension DocumentTableViewController {
             
             self.dismiss(animated: true, completion: nil)
         }
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    /// Handles setting value error and presents it to the user
+    func handleSettingValueError() {
+        
+        // Creating and presenting alert
+        let alert = UIAlertController(title: "Erro ao definir valor", message: "Verifique sua conexão com a internet e tente novamente.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
         
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)

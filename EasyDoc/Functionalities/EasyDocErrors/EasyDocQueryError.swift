@@ -29,7 +29,11 @@ public enum EasyDocQueryError: EasyDocError {
     /// Indicates that the value received is invalid or wrong (ie: fetching should receive 1 user object but 2 where received)
     case invalidValueReceived
     
+    /// Indicates that there was an error when removing a value from the database
+    case removeValue
+    
 }
+
 
 extension EasyDocQueryError: LocalizedError {
     public var errorDescription: String {
@@ -38,6 +42,8 @@ extension EasyDocQueryError: LocalizedError {
             return NSLocalizedString("An internet network error occured.", comment: "")
         case .setValue:
             return NSLocalizedString("There was an error when setting a value to the firebase database.", comment: "")
+        case .removeValue:
+            return NSLocalizedString("There was an error when removing a value from the database.", comment: "")
         case .invalidValueReceived:
             return NSLocalizedString("The value received is in invalid type or format.", comment: "")
         }
