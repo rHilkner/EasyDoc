@@ -10,7 +10,6 @@
  
  
  TODO
-    - Incluir fontes: Calibri (textos telas login e cadastro) e Champagne & Limousine (texto logo)
     - [TENSO] Montar módulo da tela de visualização do contrato
  
  

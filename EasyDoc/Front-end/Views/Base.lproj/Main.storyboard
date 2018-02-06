@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Calibri.ttf">
+            <string>Calibri</string>
+        </array>
         <array key="Champagne &amp; Limousines B.ttf">
             <string>Champagne&amp;Limousines-Bold</string>
         </array>
@@ -55,6 +58,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="kWF-i8-4p8" secondAttribute="bottom" id="3Rs-5h-h5G"/>
                                                     <constraint firstItem="kWF-i8-4p8" firstAttribute="top" secondItem="ovD-zh-tg4" secondAttribute="top" id="4DV-R4-dNx"/>
+                                                    <constraint firstItem="NjN-4E-Xxb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kWF-i8-4p8" secondAttribute="trailing" id="JWb-hv-OHu"/>
                                                     <constraint firstItem="kWF-i8-4p8" firstAttribute="leading" secondItem="ovD-zh-tg4" secondAttribute="leading" id="O1I-32-wxb"/>
                                                     <constraint firstAttribute="height" secondItem="kWF-i8-4p8" secondAttribute="height" id="RFQ-Lu-Qns"/>
                                                     <constraint firstItem="NjN-4E-Xxb" firstAttribute="centerY" secondItem="ovD-zh-tg4" secondAttribute="centerY" id="bG4-kP-5dV"/>
@@ -88,7 +92,7 @@
                                             <constraint firstAttribute="height" constant="40" id="ec8-u7-tMM"/>
                                         </constraints>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Senha" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1gH-yG-w6y">
@@ -98,7 +102,7 @@
                                             <constraint firstAttribute="height" constant="40" id="QpP-Jg-9BZ"/>
                                         </constraints>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2h-Oy-sL7">
@@ -107,7 +111,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="IjW-9P-hJR"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
                                         <state key="normal" title="Entrar">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -155,7 +159,7 @@
                                                 <fragment content="Novo por aqui?">
                                                     <attributes>
                                                         <color key="NSColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="18" name="Calibri"/>
+                                                        <font key="NSFont" size="16" name="Calibri"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -165,14 +169,14 @@ Cg
 </string>
                                                     <attributes>
                                                         <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="18" name="Calibri"/>
+                                                        <font key="NSFont" size="16" name="Calibri"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                                 <fragment content="Cadastre-se no EasyDoc!">
                                                     <attributes>
                                                         <color key="NSColor" red="0.3529411764705882" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="18" name="Calibri"/>
+                                                        <font key="NSFont" size="16" name="Calibri"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -257,6 +261,7 @@ Cg
                                                     <constraint firstItem="8vl-63-9Q6" firstAttribute="centerY" secondItem="m7p-85-BI0" secondAttribute="centerY" id="Cya-sS-dHp"/>
                                                     <constraint firstAttribute="width" constant="265" id="NpA-c8-PUc"/>
                                                     <constraint firstItem="nLi-8g-Dzb" firstAttribute="top" secondItem="m7p-85-BI0" secondAttribute="top" id="b1N-K4-TY3"/>
+                                                    <constraint firstItem="8vl-63-9Q6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nLi-8g-Dzb" secondAttribute="trailing" id="fIN-1u-3FC"/>
                                                     <constraint firstItem="nLi-8g-Dzb" firstAttribute="leading" secondItem="m7p-85-BI0" secondAttribute="leading" id="i9c-Fo-hNP"/>
                                                     <constraint firstAttribute="trailing" secondItem="8vl-63-9Q6" secondAttribute="trailing" id="sbc-lP-ToG"/>
                                                     <constraint firstAttribute="bottom" secondItem="nLi-8g-Dzb" secondAttribute="bottom" id="w9e-pI-6Dg"/>
@@ -289,7 +294,7 @@ Cg
                                             <constraint firstAttribute="height" constant="40" id="NdG-4O-0B2"/>
                                         </constraints>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Senha" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kpg-Ps-dbG">
@@ -299,7 +304,7 @@ Cg
                                             <constraint firstAttribute="height" constant="40" id="wKk-Za-tJ3"/>
                                         </constraints>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXY-s8-nuP">
@@ -308,7 +313,7 @@ Cg
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0n7-PR-C6E"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
                                         <state key="normal" title="Cadastrar">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -328,7 +333,7 @@ Cg
                                             <constraint firstAttribute="height" constant="40" id="ZHe-ZJ-1vY"/>
                                         </constraints>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
@@ -369,7 +374,7 @@ Cg
                                                 <fragment content="Já tenho uma conta!">
                                                     <attributes>
                                                         <color key="NSColor" red="0.3529411764705882" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="18" name="Calibri"/>
+                                                        <font key="NSFont" size="16" name="Calibri"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -1055,7 +1060,7 @@ nenhum documento.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GOn-4X-47x">
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GOn-4X-47x">
                             <rect key="frame" x="0.0" y="117.5" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1098,6 +1103,6 @@ nenhum documento.</string>
         <image name="Tab Bar Settings Icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FOv-HS-Edg"/>
+        <segue reference="0bE-NI-Mib"/>
     </inferredMetricsTieBreakers>
 </document>
