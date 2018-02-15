@@ -183,7 +183,7 @@ class ParseObjects {
         let documentDict: [String : Any] = [
             "title": document.title,
             "type": document.type,
-            "contents": document.content,
+            "contents": document.contents,
             "fields": createFieldsDictionary(document.fields),
             "last_modified": document.lastModified.timeIntervalSince1970
         ]

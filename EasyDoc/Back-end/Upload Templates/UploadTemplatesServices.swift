@@ -110,7 +110,75 @@ class UploadTemplatesServices {
         
         /***** CONTENTS *****/
         
-        let contents: String = ""
+        let contents: String =
+            """
+            
+            CONTRATO DE LOCAÇÃO RESIDENCIAL
+
+            Pelo presente instrumento particular, de um lado [/Partes/Locador/Nome], [/Partes/Locador/Nacionalidade], [/Partes/Locador/Estado Civil], [/Partes/Locador/Profissão], residente na [/Partes/Locador/Endereço/Rua], nº [/Partes/Locador/Endereço/Número], [/Partes/Locador/Endereço/Complemento], CEP [/Partes/Locador/Endereço/CEP], [/Partes/Locador/Endereço/Cidade]/[/Partes/Locador/Endereço/Estado], cédula de identidade RG nº [/Partes/Locador/RG], CPF nº [/Partes/Locador/CPF], email [/Partes/Locador/Email], doravante denominado locador e, de outro lado, [/Partes/Locatário/Nome], [/Partes/Locatário/Nacionalidade], [/Partes/Locatário/Estado Civil], [/Partes/Locatário/Profissão], residente na [/Partes/Locatário/Endereço/Rua], nº [/Partes/Locatário/Endereço/Número], [/Partes/Locatário/Endereço/Complemento], CEP [/Partes/Locatário/Endereço/CEP], [/Partes/Locatário/Endereço/Cidade]/[/Partes/Locatário/Endereço/Estado], cédula de identidade RG nº [/Partes/Locatário/RG], CPF nº [/Partes/Locatário/CPF], email [/Partes/Locatário/Email], doravante designado locatário, têm entre si justo e  acertado o presente contrato de locação residencial, mediante as cláusulas e condições seguintes que, mutuamente aceitam a saber:
+            
+            1º - O locador se obriga a dar em locação ao locatário o imóvel de sua propriedade, situado na [/Dados do imóvel/Endereço/Rua], nº [/Dados do imóvel/Endereço/Número], [/Dados do imóvel/Endereço/Complemento], CEP [/Dados do imóvel/Endereço/CEP], [/Dados do imóvel/Endereço/Cidade]/[/Dados do imóvel/Endereço/Estado], objeto da Matrícula nº [/Dados do imóvel/Matrícula/Número da matrícula] do [/Dados do imóvel/Matrícula/Número do cartório] Cartório de Registro de Imóveis de [/Dados do imóvel/Matrícula/Cidade do cartório]/[/Dados do imóvel/Matrícula/Estado do cartório], que, desde já, declara ter conhecimento das normas que regem o condomínio.
+            
+
+            2º - O prazo do presente contrato de locação é de [/Sobre a locação/Período de locação/Prazo de locação] meses, a iniciar no dia [/Sobre a locação/Período de locação/Data de início] para terminar no dia [/Sobre a locação/Período de locação/Data final], data em que o locatário se obriga a restituir o imóvel locado nas mesmas condições em que o recebeu, salvo as deteriorações de uso normal, inteiramente livre e desocupado.
+            
+            §1º - Benfeitorias ou modificações no imóvel locado sempre serão do conhecimento prévio do locador, que, contudo, tem a faculdade de conceder ou não a respectiva autorização, sempre incorporando-se ao imóvel, sem direito a indenização ou retenção por parte do locatário.
+            
+
+            3º - O aluguel mensal é no valor de R$ [/Sobre a locação/Valores e pagamento/Valor da locação], a ser pago, até o [/Sobre a locação/Valores e pagamento/Dia de vencimento mensal] dia útil de cada mês subsequente ao vencido, devendo ser pago proporcionalmente no primeiro e último mês, devendo ser corrigido anualmente pelo [/Sobre a locação/Valores e pagamento/Índice de correção] ou outro índice que venha substituí-lo.
+            
+            Parágrafo único: as partes desde já acordam que no curso da locação ora avençada caso venha a ser permitida ou adotada periodicidade menor do que a aqui contratada, as partes contratantes logo a ela aderem.
+            
+            §2º - Fica desde já estipulado que o não pagamento do aluguel até a data limite  de cada mês, acarretará a imediata incidência de multa de [/Sobre a locação/Valores e pagamento/Percentual de multa moratória]% do valor do aluguel, independente das sanções judiciais cabíveis, em especial liminar para despejo face ausência de garantia locatícia.
+            
+
+            4º - O locatário, durante o período de locação, arcará, sob pena de rescisão contratual, com:
+            todos os encargos tributários incidentes sobre o imóvel, exceto as contribuições de melhoria;
+            todas as despesas de conservação do prédio, de consumo de água, luz, telefone e outras ligas ao uso do imóvel;
+            todas as multas pecuniárias provenientes do atraso no pagamento de quantias sob sua responsabilidade.
+            
+
+            5º - Havendo incêndio ou acidente, que conduza à reconstrução ou reforma do objeto de locação, rescindir-se-á o contrato, sem prejuízo da responsabilidade do locatário, se o fato ocorreu por sua culpa.
+
+
+            6º - O todo e qualquer ajuste entre as partes, para integrar o presente contrato, deverá ser feito por escrito.
+
+
+            7º - A eventual tolerância do locador para com qualquer infração contratual, atraso no pagamento dos aluguéis, taxas ou impostos, não constituirá motivo para que o locatário ou o seu fiador, alegue novação.
+
+
+            8º - O presente contrato obrigará herdeiros, sucessores ou concessionários de ambas as partes esse renovará por tempo indeterminado – seguindo a concordância de locador e locatário – período em que ficará facultado ao locatário o direito de rescindi-lo, desde que notifique por escrito ao locador, no mínimo 30 dias antes da efetiva entrega das chaves, valendo para o locador as mesmas circunstâncias de prazo.
+            
+
+            9º - É vedado ao locatário ceder ou transferir o presente contrato, total ou parcialmente, sem autorização do locador.
+
+
+            10º - É eleito foro do local do imóvel para dirimir as questões resultantes da execução do presente contrato, obrigando-se a parte vencida para à vencedora.
+
+
+            Estando assim justas e convencionadas, as partes assinam o presente instrumento particular de contrato de locação residencial, em [/Sobre o contrato/Número de vias a serem assinadas] vias originais, na presença das testemunhas abaixo assinadas.
+
+
+            [/Sobre o contrato/Local/Cidade]/[/Sobre o contrato/Local/Estado], [/Sobre o contrato/Data em que será assinado].
+
+            _______________________
+            [/Partes/Locador/Nome]
+
+            _______________________
+            [/Partes/Locatário/Nome]
+
+
+            Testemunhas:
+
+            _______________________
+            [/Sobre o contrato/Testemunhas/Nome Testemunha 1]
+
+
+            _______________________
+            [/Sobre o contrato/Testemunhas/Nome Testemunha 2]
+
+
+            """
         
         /***** FIELDS *****/
         
@@ -131,7 +199,7 @@ class UploadTemplatesServices {
         ]
         
         let dadosDoImovel: [String : Any] = [
-            "Endereco": ValueTypeOrder(value: UploadTemplatesServices.endereco, type: "dict", order: 0).toDict(),
+            "Endereço": ValueTypeOrder(value: UploadTemplatesServices.endereco, type: "dict", order: 0).toDict(),
             "Matrícula": ValueTypeOrder(value: matricula, type: "dict", order: 1).toDict(),
         ]
         
@@ -170,7 +238,8 @@ class UploadTemplatesServices {
         let sobreOContrato: [String : Any] = [
             "Local": ValueTypeOrder(value: local, type: "dict", order: 0).toDict(),
             "Testemunhas": ValueTypeOrder(value: testemunhas, type: "dict", order: 1).toDict(),
-            "Número de vias a serem assinadas": ValueTypeOrder(value: "", type: "string", order: 2).toDict()
+            "Número de vias a serem assinadas": ValueTypeOrder(value: "", type: "string", order: 2).toDict(),
+            "Data em que será assinado": ValueTypeOrder(value: "", type: "string", order: 3).toDict()
         ]
         
         // FIELDS, FINALLY

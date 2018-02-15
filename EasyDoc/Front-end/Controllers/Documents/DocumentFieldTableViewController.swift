@@ -11,7 +11,6 @@ import UIKit
 class DocumentFieldTableViewController: UITableViewController {
     
     var field: Field?
-    var pathToSave: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -237,9 +236,8 @@ extension DocumentFieldTableViewController {
         }
         
         documentFieldTableViewController.field = field
-        documentFieldTableViewController.pathToSave = self.pathToSave! + "/" + field.key
         
-        self.present(documentFieldTableViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(documentFieldTableViewController, animated: true)
     }
     
     

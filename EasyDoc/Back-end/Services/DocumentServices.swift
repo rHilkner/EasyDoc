@@ -37,7 +37,7 @@ class DocumentServices {
         
         // Creating new document object
         let documentType = template.type
-        let documentContent = template.content
+        let documentContent = template.contents
         let documentFields = template.fields
         
         let newDocument = Document(autoID: nil, title: title, type: documentType, content: documentContent, fields: documentFields, lastModified: Date())
@@ -124,4 +124,5 @@ class DocumentServices {
             completionHandler(nil)
         }
     }
+    
 }

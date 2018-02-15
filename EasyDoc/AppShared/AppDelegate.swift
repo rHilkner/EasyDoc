@@ -16,20 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Changing status bar text color to white
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         // Configuring Firebase database application
         FirebaseApp.configure()
         
-        // Setting initial view controller
-        self.setInitialViewController(withIdentifier: "LoginViewController")
-        
         // Verifying if user is already logged in
         self.checkUserAlreadyLoggedIn()
-        
-        // Loading templates into AppShared.templates
-        self.loadTemplates()
         
         return true
     }
@@ -63,34 +54,23 @@ extension AppDelegate {
     
     /// Verifies if user is already logged into EasoDoc's Firebase Server.
     func checkUserAlreadyLoggedIn() {
+        
         // Veryfying if user is logged into EasyDoc's Firebase Server
-        if let user = Auth.auth().currentUser {
-            
-            self.setInitialViewController(withIdentifier: "MainScreenViewController")
-            
-            // Trying to get user email
-            if let userEmail = user.email {
-                // Loading user object from database
-                FetchingServices.loadMainUser(email: userEmail) {
-                    (fetchingError) in
-                    
-                    // Handling error
-                    if let error = fetchingError {
-                        print(error.localizedDescription)
-                        
-                        AuthServices.attemptToLogout() {
-                            (logoutError) in
-                            
-                            if logoutError != nil {
-                                print(logoutError!.localizedDescription)
-                            }
-                        }
-                    }
-                }
-            } else {
-                print(EasyDocOfflineError.foundNil.localizedDescription)
-            }
+        guard let user = Auth.auth().currentUser else {
+            self.setInitialViewController(withIdentifier: "LoginViewController")
+            return
         }
+        
+        // Trying to get user email
+        guard let userEmail = user.email else {
+            print("-> WARNING: EasyDocOfflineError.foundNil @ AppDelegate.checkUserAlreadyLoggedIn()")
+            self.setInitialViewController(withIdentifier: "LoginViewController")
+            return
+        }
+        
+        self.userIsLoggedIn(userEmail: userEmail)
+        
+        
         
 //        Auth.auth().addStateDidChangeListener {
 //            (_, user) in
@@ -128,13 +108,27 @@ extension AppDelegate {
     }
     
     
-    /// Loads templates fetched from database into AppShared.templates.
-    func loadTemplates() {
-        FetchingServices.loadTemplates() {
-            loadingError in
+    /// Loads user into the app.
+    func userIsLoggedIn(userEmail: String) {
+        
+        // Setting initial view controller as main screen
+        self.setInitialViewController(withIdentifier: "MainScreenViewController")
+        
+        // Loading user object from database
+        FetchingServices.loadMainUser(email: userEmail) {
+            (fetchingError) in
             
-            if let error = loadingError {
-                print(error.localizedDescription)
+            // Handling error
+            if fetchingError != nil {
+                print("-> WARNING: EasyDocQueryError.loadMainUser @ AppDelegate.checkUserAlreadyLoggedIn()")
+                
+                AuthServices.attemptToLogout() {
+                    (logoutError) in
+                    
+                    if logoutError != nil {
+                        print("-> WARNING: EasyDocQueryError.logoutError @ AppDelegate.checkUserAlreadyLoggedIn()")
+                    }
+                }
             }
         }
     }

@@ -17,6 +17,11 @@ class TemplatesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Verifying if templates object is still being loaded
         if AppShared.isLoadingTemplates.value {

@@ -12,12 +12,23 @@ class FetchingServices {
     
     /// Loads MainUser object fetched from database into AppShared.mainUser
     static func loadMainUser(email: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+        
         // Setting loading user as true
         AppShared.isLoadingUser.value = true
+        
+        // Loading templates from database into AppShared.templates
+        self.loadTemplates() {
+            loadingError in
+            
+            if let error = loadingError {
+                print(error.localizedDescription)
+            }
+        }
         
         // Tries to fetch main user object from EasyDoc's Database
         DatabaseManager.fetchMainUser(email: email) {
             (mainUser, fetchUserError) in
+        
             
             if fetchUserError != nil {
                 AppShared.isLoadingUser.value = false

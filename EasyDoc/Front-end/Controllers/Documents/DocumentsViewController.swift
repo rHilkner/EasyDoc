@@ -17,8 +17,14 @@ class DocumentsViewController: UIViewController {
     var documents: [Document] = []
     var loadingIndicatorAlert: UIAlertController?
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Uncomment lines below to send all templates in UploadTemplatesServices to EasyDoc's Firebase Database
         //        UploadTemplatesServices.sendAllTemplatesToDB()
@@ -36,10 +42,6 @@ class DocumentsViewController: UIViewController {
         self.loadViewController()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         // If self is delegate of isLoadingUser, then make it nil
@@ -53,7 +55,7 @@ class DocumentsViewController: UIViewController {
     func loadViewController() {
         // Getting user object
         guard let mainUser = AppShared.mainUser else {
-            print(EasyDocOfflineError.foundNil.errorDescription)
+            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentsViewController.loadViewController()")
             
             // Reloading main user object completely
             FetchingServices.reloadMainUser() {
@@ -195,6 +197,7 @@ extension DocumentsViewController: UITableViewDelegate {
 
 
 extension DocumentsViewController: IsLoadingUserDelegate {
+    
     /// Called when user session loading has ended
     func loadingEnded() {
         self.loadViewController()
@@ -226,10 +229,11 @@ extension DocumentsViewController: IsLoadingUserDelegate {
         
         // Dismissing loading indicator
         if self.loadingIndicatorAlert != nil {
-            self.loadingIndicatorAlert!.dismiss(animated: false, completion: nil)
+            self.loadingIndicatorAlert!.dismiss(animated: true, completion: nil)
             self.loadingIndicatorAlert = nil
         }
     }
+    
 }
 
 

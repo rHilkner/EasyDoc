@@ -12,26 +12,28 @@ class DocumentContentsViewController: UIViewController {
 
     var document: Document?
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentsLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        if document == nil {
+            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentContentsViewController.viewDidLoad()")
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        self.loadViewController()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func loadViewController() {
+        self.navigationItem.title = "Visualizar documento"
+        
+        self.contentsLabel.text = self.document!.readContentsWithValues()
+        
+        self.scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: self.contentsLabel.bottomAnchor).isActive = true
     }
-    */
-
+    
 }

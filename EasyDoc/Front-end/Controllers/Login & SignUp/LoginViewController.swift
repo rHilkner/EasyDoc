@@ -81,18 +81,19 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            self.goToMainScreen()
-            
             FetchingServices.loadMainUser(email: userEmail) {
                 (loginError) in
                 
                 // If error occurred, present it to the user
-                if let error = loginError {
-                    self.handlesLoginError(error: error)
-                    self.loginButton.isEnabled = true
+                if loginError != nil {
+                    // TODO: log user out if error
+                    // self.handlesLoginError(error: error)
+                    // self.loginButton.isEnabled = true
                     return
                 }
             }
+            
+            self.goToMainScreen()
         }
     }
     

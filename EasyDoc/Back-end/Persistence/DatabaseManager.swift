@@ -92,11 +92,12 @@ class DatabaseManager {
         let query = self.ref.child("templates").queryOrdered(byChild: "type")
         
         // Observing query made to get template object
-        query.observeSingleEvent(of: .value) {
+        query.observeSingleEvent(of: .value, with: {
             (templatesSnapshot) in
             
             // Handling possible errors
             guard let templatesSnapshotList = templatesSnapshot.children.allObjects as? [DataSnapshot] else {
+                print("-> WARNING: EasyDocOfflineError.castingError @ DatabaseManager.fetchTemplates()")
                 completionHandler(nil, EasyDocOfflineError.castingError)
                 return
             }
@@ -107,12 +108,14 @@ class DatabaseManager {
             for templateSnapshot in templatesSnapshotList {
                 // Getting template dictionary
                 guard let templateDict = templateSnapshot.value as? [String : Any] else {
+                    print("-> WARNING: EasyDocParsingError.snapshot @ DatabaseManager.fetchTemplates()")
                     completionHandler(nil, EasyDocParsingError.snapshot)
                     return
                 }
                 
                 // Parsing template object
                 guard let templateObject = ParseObjects.parseTemplateDictionary(templateDict, autoID: templateSnapshot.key) else {
+                    print("-> WARNING: EasyDocParsingError.template @ DatabaseManager.fetchTemplates()")
                     completionHandler(nil, EasyDocParsingError.template)
                     return
                 }
@@ -123,6 +126,11 @@ class DatabaseManager {
             
             // Return templates fetched
             completionHandler(templates, nil)
+        }) {
+            error in
+            
+            print("-> WARNING: EasyDocQueryError.observeValue @ DatabaseManager.fetchTemplates()")
+            completionHandler(nil, EasyDocQueryError.observeValue)
         }
     }
     

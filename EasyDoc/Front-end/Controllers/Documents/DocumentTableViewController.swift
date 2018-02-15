@@ -326,6 +326,7 @@ extension DocumentTableViewController {
                     return
                 }
                 
+                self.loadViewController()
                 self.tableView.reloadData()
             }
         }

@@ -29,8 +29,14 @@ public enum EasyDocQueryError: EasyDocError {
     /// Indicates that the value received is invalid or wrong (ie: fetching should receive 1 user object but 2 where received)
     case invalidValueReceived
     
-    /// Indicates that there was an error when removing a value from the database
+    /// Indicates that there was an error when removing a value from the database.
     case removeValue
+    
+    /// Indicates that there is an error with an object fetched from the database.
+    case databaseObject
+    
+    /// Indicates the query made to observe a value returned an error.
+    case observeValue
     
 }
 
@@ -46,6 +52,10 @@ extension EasyDocQueryError: LocalizedError {
             return NSLocalizedString("There was an error when removing a value from the database.", comment: "")
         case .invalidValueReceived:
             return NSLocalizedString("The value received is in invalid type or format.", comment: "")
+        case .databaseObject:
+            return NSLocalizedString("The object fetched from the database has an error.", comment: "")
+        case .observeValue:
+            return NSLocalizedString("There was an error when trying to observe a value on the database.", comment: "")
         }
     }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F9B3A29CF6BD9E453B7D198 /* Pods_EasyDoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4943565C9B9F22F7FB166CA6 /* Pods_EasyDoc.framework */; };
+		6A71DF798E16916CCEC038D1 /* Pods_EasyDoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9092BD6E781F15F85DEEA1 /* Pods_EasyDoc.framework */; };
 		C62418762020ECD200C20CFB /* UploadTemplatesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62418752020ECD200C20CFB /* UploadTemplatesServices.swift */; };
 		C62972782023AAE500231495 /* TemplateFieldTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972772023AAE500231495 /* TemplateFieldTableViewController.swift */; };
 		C629727A2023AAFB00231495 /* DocumentFieldTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972792023AAFB00231495 /* DocumentFieldTableViewController.swift */; };
@@ -29,6 +29,7 @@
 		C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480199201F94910099F872 /* DocumentTableViewController.swift */; };
 		C648019C201F98840099F872 /* FetchingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019B201F98840099F872 /* FetchingServices.swift */; };
 		C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019F201FA5550099F872 /* TemplatesViewController.swift */; };
+		C6560174202AACFC00AABB7E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6560173202AACFC00AABB7E /* StringExtensions.swift */; };
 		C67EDC4C2029F01A00A64BCE /* Calibri Z.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC432029F01900A64BCE /* Calibri Z.TTF */; };
 		C67EDC4D2029F01A00A64BCE /* Calibri I.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC442029F01900A64BCE /* Calibri I.TTF */; };
 		C67EDC4E2029F01A00A64BCE /* Calibri B.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC452029F01900A64BCE /* Calibri B.TTF */; };
@@ -62,7 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4943565C9B9F22F7FB166CA6 /* Pods_EasyDoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyDoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A9092BD6E781F15F85DEEA1 /* Pods_EasyDoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyDoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		827BD2A8F175569DA5C08BE6 /* Pods-EasyDoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyDoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyDoc/Pods-EasyDoc.release.xcconfig"; sourceTree = "<group>"; };
 		ACABEFCA855CF27AA93F7E2E /* Pods-EasyDoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyDoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyDoc/Pods-EasyDoc.debug.xcconfig"; sourceTree = "<group>"; };
 		C62418752020ECD200C20CFB /* UploadTemplatesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTemplatesServices.swift; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		C6480199201F94910099F872 /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
 		C648019B201F98840099F872 /* FetchingServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingServices.swift; sourceTree = "<group>"; };
 		C648019F201FA5550099F872 /* TemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesViewController.swift; sourceTree = "<group>"; };
+		C6560173202AACFC00AABB7E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		C67EDC432029F01900A64BCE /* Calibri Z.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Z.TTF"; sourceTree = "<group>"; };
 		C67EDC442029F01900A64BCE /* Calibri I.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri I.TTF"; sourceTree = "<group>"; };
 		C67EDC452029F01900A64BCE /* Calibri B.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri B.TTF"; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F9B3A29CF6BD9E453B7D198 /* Pods_EasyDoc.framework in Frameworks */,
+				6A71DF798E16916CCEC038D1 /* Pods_EasyDoc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				C6480197201F91C70099F872 /* DateExtensions.swift */,
+				C6560173202AACFC00AABB7E /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,7 +424,7 @@
 		E60B02C64222FC7F732C7D10 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4943565C9B9F22F7FB166CA6 /* Pods_EasyDoc.framework */,
+				1A9092BD6E781F15F85DEEA1 /* Pods_EasyDoc.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				C62972852024FD2300231495 /* TemplateDetailTableViewCell.swift in Sources */,
 				C629728B2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift in Sources */,
 				C648018B201C0E3B0099F872 /* EasyDocParsingError.swift in Sources */,
+				C6560174202AACFC00AABB7E /* StringExtensions.swift in Sources */,
 				C629727D2023ABB400231495 /* DocumentContentsViewController.swift in Sources */,
 				C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */,
 				C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */,
@@ -748,12 +752,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HMM2SSNKR5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/EasyDoc/plist files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xpt.EasyDoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -764,12 +780,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HMM2SSNKR5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/EasyDoc/plist files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xpt.EasyDoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
