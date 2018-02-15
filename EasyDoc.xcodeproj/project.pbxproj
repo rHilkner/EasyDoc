@@ -765,6 +765,7 @@
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EasyDoc/plist files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xpt.EasyDoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -793,6 +794,7 @@
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EasyDoc/plist files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xpt.EasyDoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
