@@ -88,20 +88,14 @@ extension DocumentFieldTableViewController {
             
             // Verifying which type of cell we need to cast
             if cellField.type == "dict" {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDisclosure") as? DocumentDisclosureTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt) -1")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 
                 return cell
                 
             } else {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDetail") as? DocumentDetailTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt) -2")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.documentCell(tableView: tableView, type: .withDetail) as! DocumentDetailTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 
@@ -126,20 +120,14 @@ extension DocumentFieldTableViewController {
         
         // Verifying which type of cell we need to cast
         if cellField.type == "dict" {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDisclosure") as? DocumentDisclosureTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
             
             cell.titleLabel.text = cellField.key
             
             return cell
             
         } else {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDetail") as? DocumentDetailTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.documentCell(tableView: tableView, type: .withDetail) as! DocumentDetailTableViewCell
             
             cell.titleLabel.text = cellField.key
             

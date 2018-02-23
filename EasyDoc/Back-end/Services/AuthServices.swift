@@ -25,7 +25,7 @@ class AuthServices {
             }
             
             // Inputs user on EasyDoc's Database
-            DatabaseManager.createNewUser(email: email, password: password) {
+            UserPersistence.createNewUser(email: email, password: password) {
                 (mainUser, signUpError) in
                 
                 if let error = signUpError {

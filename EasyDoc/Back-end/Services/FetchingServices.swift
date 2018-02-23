@@ -26,7 +26,7 @@ class FetchingServices {
         }
         
         // Tries to fetch main user object from EasyDoc's Database
-        DatabaseManager.fetchMainUser(email: email) {
+        UserPersistence.fetchMainUser(email: email) {
             (mainUser, fetchUserError) in
         
             
@@ -54,7 +54,7 @@ class FetchingServices {
         AppShared.isLoadingTemplates.value = true
         
         // Tries to fetch main user object from EasyDoc's Database
-        DatabaseManager.fetchTemplates() {
+        TemplatePersistence.fetchTemplates() {
             (templatesFetched, fetchingError) in
             
             // Verifying possible errors

@@ -89,20 +89,14 @@ extension TemplateFieldTableViewController {
             
             // Verifying which type of cell we need to cast
             if cellField.type == "dict" {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDisclosure") as? TemplateDisclosureTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ TemplateFieldTableViewController.tableView(cellForRowAt)")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 
                 return cell
                 
             } else {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDetail") as? TemplateDetailTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ TemplateFieldTableViewController.tableView(cellForRowAt)")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.templateCell(tableView: tableView, type: .withDetail) as! TemplateDetailTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 cell.detailLabel.text = "-"
@@ -122,20 +116,14 @@ extension TemplateFieldTableViewController {
         
         // Verifying which type of cell we need to cast
         if cellField.type == "dict" {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDisclosure") as? TemplateDisclosureTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
             
             cell.titleLabel.text = cellField.key
             
             return cell
             
         } else {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDetail") as? TemplateDetailTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.templateCell(tableView: tableView, type: .withDetail) as! TemplateDetailTableViewCell
             
             cell.titleLabel.text = cellField.key
             cell.detailLabel.text = "-"

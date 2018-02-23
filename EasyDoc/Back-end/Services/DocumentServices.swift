@@ -14,7 +14,7 @@ class DocumentType {
 
 class DocumentServices {
     
-    /// returns number of sections that a field being presented on screen
+    /// Returns number of sections that a field being presented on screen
     static func multipleSections(fields: [String : [String : Any]]) -> Int {
         
         // If all fields are dictionaries, then they are all sections and their keys are all headers
@@ -33,20 +33,16 @@ class DocumentServices {
         return fields.count
     }
     
-    static func addTemplateToUserDocuments(_ template: Template, title: String, completionHandler: @escaping (EasyDocError?) -> Void) {
-        
-        // Creating new document object
-        let documentType = template.type
-        let documentContent = template.contents
-        let documentFields = template.fields
-        
-        let newDocument = Document(autoID: nil, title: title, type: documentType, content: documentContent, fields: documentFields, lastModified: Date())
+    
+    /// Adds a given document to the main user in-app and into the EasyDoc's database
+    static func addDocumentToUser(_ newDocument: Document, completionHandler: @escaping (EasyDocError?) -> Void) {
         
         // Adding new document to user's database
-        DatabaseManager.addDocumentToMainUserDB(document: newDocument) {
+        DocumentPersistence.addDocumentToMainUserDB(document: newDocument) {
             addingError in
             
             if let error = addingError {
+                print("-> WARNING: EasyDocQueryError.setValue @ DocumentServices.addDocumentToUser()")
                 completionHandler(error)
                 return
             }
@@ -62,7 +58,7 @@ class DocumentServices {
     static func setValueToField(field: Field, value: Any, completionHandler: @escaping (EasyDocError?) -> Void) {
         
         // Trying to save value to database
-        DatabaseManager.setValueToField(path: field.path, value: value) {
+        DocumentPersistence.setValueToField(path: field.path, value: value) {
             setValueError in
             
             if let error = setValueError {
@@ -83,7 +79,7 @@ class DocumentServices {
     static func setTitleToDocument(document: Document, title: String, completionHandler: @escaping (EasyDocError?) -> Void) {
         
         // Trying to save title to database
-        DatabaseManager.setTitleToDocument(path: document.autoID! + "/title", title: title) {
+        DocumentPersistence.setTitleToDocument(path: document.autoID! + "/title", title: title) {
             setValueError in
             
             if let error = setValueError {
@@ -104,7 +100,7 @@ class DocumentServices {
     static func deleteDocument(autoID: String, completionHandler: @escaping (EasyDocError?) -> Void) {
         
         // Deleting the document from the database
-        DatabaseManager.deleteDocument(autoID: autoID) {
+        DocumentPersistence.deleteDocument(autoID: autoID) {
             _error in
             
             if let error = _error {
@@ -125,4 +121,86 @@ class DocumentServices {
         }
     }
     
+    
+    /// Replace fields of the document's contents with it's value or with "_____" if value is nil.
+    static func readContentsWithValues(document: Document) -> String? {
+        
+        var readableContents = document.template.contents
+        var searchStartIndex = readableContents.startIndex
+        
+        // Keep advancing the search range until can't find any more fields
+        while let fieldPathStartRange = readableContents.range(of: "[", range: searchStartIndex..<readableContents.endIndex) {
+            
+            guard let fieldPathEndRange = readableContents.range(of: "]", range: fieldPathStartRange.upperBound..<readableContents.endIndex) else {
+                print("-> WARNING: EasyDocQueryError.databaseObject @ Document.readContentsWithValues()")
+                return nil
+            }
+            
+            // Getting field path string
+            let path = String(readableContents[fieldPathStartRange.upperBound..<fieldPathEndRange.lowerBound])
+            
+            // Getting the field value
+            guard let value = self.fieldValue(document: document, path: path) else {
+                print("-> WARNING: EasyDocQueryError.databaseObject @ Document.readContentsWithValues()")
+                return nil
+            }
+            
+            // Getting range to be replaced
+            let replaceRange = fieldPathStartRange.lowerBound..<fieldPathEndRange.upperBound
+            
+            let valueToReplace = (value == "") ? "_____" : value
+            
+            // Replacing field with value
+            readableContents.replaceSubrange(replaceRange, with: valueToReplace)
+            
+            // Reseting search start index
+            searchStartIndex = readableContents.index(fieldPathStartRange.lowerBound, offsetBy: valueToReplace.count)
+        }
+        
+        return readableContents
+    }
+    
+    
+    /// Finds the value of a document's field with given path.
+    static func fieldValue(document: Document, path: String) -> String? {
+        
+        // Getting range of first "/" occurence
+        guard var fieldKeyStartRange = path.range(of: "/", range: path.startIndex..<path.endIndex) else {
+            print("-> WARNING: EasyDocQueryError.databaseObject @ Template.readContents()")
+            return nil
+        }
+        
+        var fields = document.template.fields
+        
+        // Keep advancing the search range until can't find any more "/"
+        while let fieldKeyEndRange = path.range(of: "/", range: fieldKeyStartRange.upperBound..<path.endIndex) {
+            
+            // Getting next key of the path
+            let fieldKey = String(path[fieldKeyStartRange.upperBound..<fieldKeyEndRange.lowerBound])
+            
+            // Getting fields of the field with correspondent key
+            for field in fields {
+                if field.key == fieldKey {
+                    // Reseting fields array
+                    fields = field.value as! [Field]
+                    break
+                }
+            }
+            
+            fieldKeyStartRange = fieldKeyEndRange
+        }
+        
+        // Getting value of the last field of the path
+        let fieldKey = String(path[fieldKeyStartRange.upperBound...])
+        
+        // Finding field with determined key
+        for field in fields {
+            if field.key == fieldKey {
+                return (field.value as! String)
+            }
+        }
+        
+        // If no correspondent field key is found, returns nil
+        return nil
+    }
 }

@@ -31,7 +31,7 @@ class TemplateContentsViewController: UIViewController {
     func loadViewController() {
         self.navigationItem.title = "Visualizar documento"
         
-        self.contentsLabel.text = self.template!.readContents()
+        self.contentsLabel.text = TemplateServices.readContents(template: template!)
         
         self.scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: self.contentsLabel.bottomAnchor).isActive = true
     }

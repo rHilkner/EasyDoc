@@ -64,13 +64,13 @@ extension DocumentTableViewController {
     func sectionCount() -> Int {
         
         // If all fields are of the type "dict", then they're all sections and the fields nested to each of their values are the cells of that section; else the fields are all cells
-        for field in self.document!.fields {
+        for field in self.document!.template.fields {
             if field.type != "dict" {
                 return 2
             }
         }
         
-        return self.document!.fields.count + 1
+        return self.document!.template.fields.count + 1
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,13 +87,13 @@ extension DocumentTableViewController {
         
         // If number of sections is 2, then all fields of the document are gonna be cells
         if self.sectionCount() == 2 && section == 1 {
-            return self.document!.fields.count
+            return self.document!.template.fields.count
         }
         
         // If the number of sections is >2, then all fields are sections
         if self.sectionCount() > 2 {
             // Verifying casting error
-            guard let sectionFields = self.document!.fields[section-1].value as? [Field] else {
+            guard let sectionFields = self.document!.template.fields[section-1].value as? [Field] else {
                 print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(numberOfRowsInSection)")
                 return 0
             }
@@ -112,10 +112,7 @@ extension DocumentTableViewController {
         
         // If section is the first one, return DocumentCellWithDisclosure
         if section == 0 {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDisclosure") as? DocumentDisclosureTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
             
             cell.titleLabel.text = "Visualizar documento"
             return cell
@@ -123,24 +120,18 @@ extension DocumentTableViewController {
         
         // If number of sections is 1, then all fields of the document are gonna be cells
         if self.sectionCount() == 2 {
-            let cellField = self.document!.fields[row]
+            let cellField = self.document!.template.fields[row]
             
             // Verifying which type of cell we need to cast
             if cellField.type == "dict" {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDisclosure") as? DocumentDisclosureTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(cellForRowAt)")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 
                 return cell
                 
             } else {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDetail") as? DocumentDetailTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(cellForRowAt)")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.documentCell(tableView: tableView, type: .withDetail) as! DocumentDetailTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 
@@ -155,7 +146,7 @@ extension DocumentTableViewController {
         }
         
         // Getting fields of the determined section
-        guard let sectionFields = self.document!.fields[section-1].value as? [Field] else {
+        guard let sectionFields = self.document!.template.fields[section-1].value as? [Field] else {
             print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(titleForHeaderInSection)")
             return UITableViewCell()
         }
@@ -165,20 +156,14 @@ extension DocumentTableViewController {
         
         // Verifying which type of cell we need to cast
         if cellField.type == "dict" {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDisclosure") as? DocumentDisclosureTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
             
             cell.titleLabel.text = cellField.key
             
             return cell
             
         } else {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCellWithDetail") as? DocumentDetailTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.documentCell(tableView: tableView, type: .withDetail) as! DocumentDetailTableViewCell
             
             cell.titleLabel.text = cellField.key
             
@@ -206,7 +191,7 @@ extension DocumentTableViewController {
         }
         
         // Else, set the headers as the key of the field of the template
-        return self.document!.fields[section-1].key
+        return self.document!.template.fields[section-1].key
     }
     
     
@@ -232,17 +217,17 @@ extension DocumentTableViewController {
         
         // If sectionCount() == 2, then if the selected cell is a dictionary, then show that field's view controller; else open alert to fill it's value
         if self.sectionCount() == 2 {
-            if self.document!.fields[row].type == "dict" {
-                self.goToDocumentFieldTableViewController(field: self.document!.fields[row])
+            if self.document!.template.fields[row].type == "dict" {
+                self.goToDocumentFieldTableViewController(field: self.document!.template.fields[row])
             } else {
-                self.openFillingFieldAlert(field: self.document!.fields[row])
+                self.openFillingFieldAlert(field: self.document!.template.fields[row])
             }
             
             return
         }
         
         // Getting the field list of the determined section
-        guard let sectionFields = self.document!.fields[section-1].value as? [Field] else {
+        guard let sectionFields = self.document!.template.fields[section-1].value as? [Field] else {
             print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(didSelectRowAt)")
             return
         }

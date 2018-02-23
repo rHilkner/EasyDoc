@@ -98,10 +98,7 @@ extension TemplateTableViewController {
         
         // If section is the first one, return TemplateCellWithDisclosure
         if section == 0 {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDisclosure") as? TemplateDisclosureTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
             
             cell.titleLabel.text = "Visualizar documento"
             return cell
@@ -109,10 +106,7 @@ extension TemplateTableViewController {
         
         // If section if the last one, return AddTemplateCell
         if section == self.sectionCount()-1 {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "AddTemplateCell") as? AddTemplateTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.templateCell(tableView: tableView, type: .addButton) as! AddTemplateTableViewCell
             
             return cell
         }
@@ -123,25 +117,19 @@ extension TemplateTableViewController {
             
             // Verifying which type of cell we need to cast
             if cellField.type == "dict" {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDisclosure") as? TemplateDisclosureTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
                 
                 cell.titleLabel.text = cellField.key
-                
                 return cell
                 
             } else {
-                guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDetail") as? TemplateDetailTableViewCell else {
-                    print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                    return UITableViewCell()
-                }
+                let cell = CellFactory.templateCell(tableView: tableView, type: .withDetail) as! TemplateDetailTableViewCell
                 
                 cell.titleLabel.text = cellField.key
                 cell.detailLabel.text = "-"
                 
                 return cell
+                
             }
         }
         
@@ -156,20 +144,14 @@ extension TemplateTableViewController {
         
         // Verifying which type of cell we need to cast
         if cellField.type == "dict" {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDisclosure") as? TemplateDisclosureTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
             
             cell.titleLabel.text = cellField.key
             
             return cell
             
         } else {
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCellWithDetail") as? TemplateDetailTableViewCell else {
-                print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(cellForRowAt)")
-                return UITableViewCell()
-            }
+            let cell = CellFactory.templateCell(tableView: tableView, type: .withDetail) as! TemplateDetailTableViewCell
             
             cell.titleLabel.text = cellField.key
             cell.detailLabel.text = "-"
@@ -306,7 +288,7 @@ extension TemplateTableViewController {
             }
             
             // Trying to add the template to the main user's documents
-            DocumentServices.addTemplateToUserDocuments(self.template!, title: documentTitle) {
+            TemplateServices.addTemplateToUserDocuments(self.template!, title: documentTitle) {
                 addingError in
                 
                 if addingError != nil {

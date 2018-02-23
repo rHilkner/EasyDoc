@@ -47,27 +47,30 @@ class ParseObjects {
             return nil
         }
         
-        // Getting document type
-        guard let documentType = documentDict["type"] as? String else {
+        // Getting document template type
+        guard let documentTemplateType = documentDict["type"] as? String else {
             return nil
         }
         
-        // Getting document contents
-        guard let documentContent = documentDict["contents"] as? String else {
+        // Getting document template contents
+        guard let documentTemplateContents = documentDict["contents"] as? String else {
             return nil
         }
         
-        // Getting document fields
-        guard let _documentFields = documentDict["fields"] as? [String : [String : Any]] else {
+        // Getting document template fields
+        guard let _documentTemplateFields = documentDict["fields"] as? [String : [String : Any]] else {
             return nil
         }
         
-        // Getting template fields
+        // Parsing document template fields
         let path = autoID + "/fields"
         
-        guard let documentFields = self.parseFields(_documentFields, path: path) else {
+        guard let documentTemplateFields = self.parseFields(_documentTemplateFields, path: path) else {
             return nil
         }
+        
+        // Constructing document's template
+        let documentTemplate = Template(type: documentTemplateType, content: documentTemplateContents, fields: documentTemplateFields)
         
         // Getting date when document was last modified
         guard let documentTimestamp = documentDict["last_modified"] as? TimeInterval else {
@@ -77,7 +80,7 @@ class ParseObjects {
         let lastModified = Date(timeIntervalSince1970: documentTimestamp)
         
         // Returns document object
-        return Document(autoID: autoID, title: documentTitle, type: documentType, content: documentContent, fields: documentFields, lastModified: lastModified)
+        return Document(autoID: autoID, title: documentTitle, template: documentTemplate, lastModified: lastModified)
     }
     
     
@@ -182,9 +185,9 @@ class ParseObjects {
         // Creating document dictionary
         let documentDict: [String : Any] = [
             "title": document.title,
-            "type": document.type,
-            "contents": document.contents,
-            "fields": createFieldsDictionary(document.fields),
+            "type": document.template.type,
+            "contents": document.template.contents,
+            "fields": createFieldsDictionary(document.template.fields),
             "last_modified": document.lastModified.timeIntervalSince1970
         ]
         

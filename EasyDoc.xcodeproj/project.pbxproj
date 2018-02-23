@@ -29,7 +29,6 @@
 		C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480199201F94910099F872 /* DocumentTableViewController.swift */; };
 		C648019C201F98840099F872 /* FetchingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019B201F98840099F872 /* FetchingServices.swift */; };
 		C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019F201FA5550099F872 /* TemplatesViewController.swift */; };
-		C6560174202AACFC00AABB7E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6560173202AACFC00AABB7E /* StringExtensions.swift */; };
 		C67EDC4C2029F01A00A64BCE /* Calibri Z.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC432029F01900A64BCE /* Calibri Z.TTF */; };
 		C67EDC4D2029F01A00A64BCE /* Calibri I.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC442029F01900A64BCE /* Calibri I.TTF */; };
 		C67EDC4E2029F01A00A64BCE /* Calibri B.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC452029F01900A64BCE /* Calibri B.TTF */; };
@@ -43,6 +42,12 @@
 		C6948592201BAB0100357129 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948591201BAB0100357129 /* ErrorHandling.swift */; };
 		C6948596201BADA900357129 /* EasyDocError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948595201BADA900357129 /* EasyDocError.swift */; };
 		C6948598201BCC1F00357129 /* ParseObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948597201BCC1F00357129 /* ParseObjects.swift */; };
+		C6D4CCBB203FF35E00CBCE8D /* TemplateServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCBA203FF35E00CBCE8D /* TemplateServices.swift */; };
+		C6D4CCBD203FFA0700CBCE8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */; };
+		C6D4CCBF203FFA1200CBCE8D /* UserPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */; };
+		C6D4CCC1203FFA2800CBCE8D /* TemplatePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCC0203FFA2800CBCE8D /* TemplatePersistence.swift */; };
+		C6D4CCC3203FFA3600CBCE8D /* DocumentPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCC2203FFA3600CBCE8D /* DocumentPersistence.swift */; };
+		C6D4CCC5204006E800CBCE8D /* CellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCC4204006E800CBCE8D /* CellFactory.swift */; };
 		C6DEC693202243E400309C47 /* TemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEC692202243E400309C47 /* TemplateTableViewController.swift */; };
 		C6DEC69A2022539900309C47 /* DocumentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEC6992022539900309C47 /* DocumentServices.swift */; };
 		C6DEC69C2022971600309C47 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEC69B2022971600309C47 /* Field.swift */; };
@@ -59,7 +64,6 @@
 		C6FABAF92018F87E0068C6ED /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABAF82018F87E0068C6ED /* Template.swift */; };
 		C6FABAFB2018FA080068C6ED /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABAFA2018FA080068C6ED /* AuthServices.swift */; };
 		C6FABAFE2018FBF70068C6ED /* AppShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABAFD2018FBF70068C6ED /* AppShared.swift */; };
-		C6FABB0320190C7E0068C6ED /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABB0220190C7E0068C6ED /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +91,6 @@
 		C6480199201F94910099F872 /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
 		C648019B201F98840099F872 /* FetchingServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingServices.swift; sourceTree = "<group>"; };
 		C648019F201FA5550099F872 /* TemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesViewController.swift; sourceTree = "<group>"; };
-		C6560173202AACFC00AABB7E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		C67EDC432029F01900A64BCE /* Calibri Z.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Z.TTF"; sourceTree = "<group>"; };
 		C67EDC442029F01900A64BCE /* Calibri I.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri I.TTF"; sourceTree = "<group>"; };
 		C67EDC452029F01900A64BCE /* Calibri B.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri B.TTF"; sourceTree = "<group>"; };
@@ -101,6 +104,12 @@
 		C6948591201BAB0100357129 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		C6948595201BADA900357129 /* EasyDocError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocError.swift; sourceTree = "<group>"; };
 		C6948597201BCC1F00357129 /* ParseObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseObjects.swift; sourceTree = "<group>"; };
+		C6D4CCBA203FF35E00CBCE8D /* TemplateServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateServices.swift; sourceTree = "<group>"; };
+		C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistence.swift; sourceTree = "<group>"; };
+		C6D4CCC0203FFA2800CBCE8D /* TemplatePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePersistence.swift; sourceTree = "<group>"; };
+		C6D4CCC2203FFA3600CBCE8D /* DocumentPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPersistence.swift; sourceTree = "<group>"; };
+		C6D4CCC4204006E800CBCE8D /* CellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFactory.swift; sourceTree = "<group>"; };
 		C6DEC692202243E400309C47 /* TemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateTableViewController.swift; sourceTree = "<group>"; };
 		C6DEC6992022539900309C47 /* DocumentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentServices.swift; sourceTree = "<group>"; };
 		C6DEC69B2022971600309C47 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
@@ -119,7 +128,6 @@
 		C6FABAF82018F87E0068C6ED /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		C6FABAFA2018FA080068C6ED /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
 		C6FABAFD2018FBF70068C6ED /* AppShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShared.swift; sourceTree = "<group>"; };
-		C6FABB0220190C7E0068C6ED /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +185,7 @@
 		C648018E201ECAAA0099F872 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C6D4CCC4204006E800CBCE8D /* CellFactory.swift */,
 				C62972872024FE9500231495 /* Documents */,
 				C62972862024FE8E00231495 /* Templates */,
 			);
@@ -260,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				C6480197201F91C70099F872 /* DateExtensions.swift */,
-				C6560173202AACFC00AABB7E /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +350,7 @@
 				C6FABAFA2018FA080068C6ED /* AuthServices.swift */,
 				C648019B201F98840099F872 /* FetchingServices.swift */,
 				C6DEC6992022539900309C47 /* DocumentServices.swift */,
+				C6D4CCBA203FF35E00CBCE8D /* TemplateServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -349,8 +358,11 @@
 		C6FABAED2018F5B80068C6ED /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				C6FABB0220190C7E0068C6ED /* DatabaseManager.swift */,
 				C6948597201BCC1F00357129 /* ParseObjects.swift */,
+				C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */,
+				C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */,
+				C6D4CCC0203FFA2800CBCE8D /* TemplatePersistence.swift */,
+				C6D4CCC2203FFA3600CBCE8D /* DocumentPersistence.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -573,6 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D4CCC3203FFA3600CBCE8D /* DocumentPersistence.swift in Sources */,
 				C6480189201C02A30099F872 /* EasyDocQueryError.swift in Sources */,
 				C6E8EDBC2016EFBD0075B729 /* SignUpViewController.swift in Sources */,
 				C6E8EDC62017CFDB0075B729 /* Notes.swift in Sources */,
@@ -589,25 +602,28 @@
 				C629727A2023AAFB00231495 /* DocumentFieldTableViewController.swift in Sources */,
 				C6480198201F91C70099F872 /* DateExtensions.swift in Sources */,
 				C6E8EDAC2016E5180075B729 /* LoginViewController.swift in Sources */,
+				C6D4CCC1203FFA2800CBCE8D /* TemplatePersistence.swift in Sources */,
 				C6480196201F8E580099F872 /* EasyDocGeneralError.swift in Sources */,
 				C62972832024FD0900231495 /* TemplateDisclosureTableViewCell.swift in Sources */,
-				C6FABB0320190C7E0068C6ED /* DatabaseManager.swift in Sources */,
 				C629728D2024FF5400231495 /* DocumentDetailTableViewCell.swift in Sources */,
 				C6E8EDAA2016E5180075B729 /* AppDelegate.swift in Sources */,
 				C6FABAF92018F87E0068C6ED /* Template.swift in Sources */,
 				C648019C201F98840099F872 /* FetchingServices.swift in Sources */,
 				C62972812024F4AC00231495 /* AddTemplateTableViewCell.swift in Sources */,
+				C6D4CCBD203FFA0700CBCE8D /* FirebaseManager.swift in Sources */,
 				C6DEC69A2022539900309C47 /* DocumentServices.swift in Sources */,
 				C6FABAF72018F76C0068C6ED /* Document.swift in Sources */,
+				C6D4CCC5204006E800CBCE8D /* CellFactory.swift in Sources */,
 				C62972892024FF3300231495 /* TemplateTableViewCell.swift in Sources */,
 				C6FABAF22018F70E0068C6ED /* MainUser.swift in Sources */,
 				C6DEC69C2022971600309C47 /* Field.swift in Sources */,
 				C62972852024FD2300231495 /* TemplateDetailTableViewCell.swift in Sources */,
 				C629728B2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift in Sources */,
 				C648018B201C0E3B0099F872 /* EasyDocParsingError.swift in Sources */,
-				C6560174202AACFC00AABB7E /* StringExtensions.swift in Sources */,
 				C629727D2023ABB400231495 /* DocumentContentsViewController.swift in Sources */,
+				C6D4CCBB203FF35E00CBCE8D /* TemplateServices.swift in Sources */,
 				C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */,
+				C6D4CCBF203FFA1200CBCE8D /* UserPersistence.swift in Sources */,
 				C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */,
 				C648018D201E69F40099F872 /* SettingsTableViewController.swift in Sources */,
 				C6948592201BAB0100357129 /* ErrorHandling.swift in Sources */,
