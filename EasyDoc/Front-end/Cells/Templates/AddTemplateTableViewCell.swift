@@ -10,4 +10,6 @@ import UIKit
 
 class AddTemplateTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var addTemplateLabel: UILabel!
+    
 }

@@ -18,7 +18,7 @@ class DocumentPersistence {
         let userRef = FirebaseManager.databaseReference.child("users").child(AppShared.mainUser!.autoID).child("documents").childByAutoId()
         
         // Creating document dictionary
-        let documentDict = ParseObjects.createDocumentDictionary(document)
+        let documentDict = DocumentParser.createDocumentDictionary(document)
         
         // Adding dictionary to user's database
         userRef.setValue(documentDict) {
@@ -77,9 +77,9 @@ class DocumentPersistence {
     
     
     /// Deletes a document from the user's database
-    static func deleteDocument(autoID: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+    static func deleteDocument(_ document: Document, completionHandler: @escaping (EasyDocError?) -> Void) {
         
-        let documentRef = FirebaseManager.databaseReference.child("users/\(AppShared.mainUser!.autoID)/documents/" + autoID)
+        let documentRef = FirebaseManager.databaseReference.child("users/\(AppShared.mainUser!.autoID)/documents/" + document.autoID!)
         
         documentRef.removeValue() {
             error, _ in

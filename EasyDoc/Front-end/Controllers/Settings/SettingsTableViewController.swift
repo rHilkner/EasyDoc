@@ -10,37 +10,48 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
+    // Table view and logout functions on extensions below
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+// MARK: - Table view data source
+extension SettingsTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        // Setting only 1 row for the logout cell
+        let numberOfRows = 1
+        return numberOfRows
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = CellFactory.logoutCell(tableView: tableView)
+        return cell
+    }
+    
+}
+
+
+// MARK: - Table view delegate
+extension SettingsTableViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Deselecting the selected cell
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.logoutButtonPressed()
+    }
+}
+    
+
+// MARK: - Performing actions
+extension SettingsTableViewController {
     
     /// Called when logout button is pressed
-    @IBAction func LogoutButtonPressed() {
+    func logoutButtonPressed() {
+        
+        // Creating alert and adding actions
+        let logoutAlert = UIAlertController(title: "Tem certeza que deseja sair?", message: nil, preferredStyle: .actionSheet)
+        
         // Creating logout action to present alert on screen
         let logoutAction = UIAlertAction(title: "Sair", style: .destructive) {
             _ in
@@ -59,11 +70,9 @@ class SettingsTableViewController: UITableViewController {
         // Creating cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
             _ in
-            print("Cancelled")
+            print("Logout cancelled")
         }
         
-        // Creating alert and adding actions
-        let logoutAlert = UIAlertController(title: "Tem certeza que deseja sair?", message: nil, preferredStyle: .actionSheet)
         logoutAlert.addAction(logoutAction)
         logoutAlert.addAction(cancelAction)
         
@@ -72,17 +81,12 @@ class SettingsTableViewController: UITableViewController {
     }
     
     
+    /// Presents Login Screen
     func goToLoginScreen() {
-        // TODO: check if there is a way to dismiss all the view controllers and leave only the login view controller
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginNavigationController = ViewControllerFactory.instantiateViewController(ofType: .authNavigationController)
         
-        guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ SettingsTableViewController.goToLoginScreen()")
-            return
-        }
-        
-        self.present(loginViewController, animated: true, completion: nil)
+        self.tabBarController?.removeFromParentViewController()
+        self.present(loginNavigationController, animated: true, completion: nil)
     }
     
-
 }

@@ -9,5 +9,15 @@
 import Foundation
 
 protocol EasyDocError: Error {
-    var errorDescription: String {get}
+    /// Description of the occurred error
+    var description: String {get}
+}
+
+extension EasyDocError {
+    // Setting a default error description
+    var description: String {
+        get {
+            return NSLocalizedString("An unidentified error occurred.", comment: "")
+        }
+    }
 }

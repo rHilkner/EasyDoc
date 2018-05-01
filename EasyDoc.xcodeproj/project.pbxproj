@@ -14,11 +14,12 @@
 		C629727D2023ABB400231495 /* DocumentContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629727C2023ABB400231495 /* DocumentContentsViewController.swift */; };
 		C629727F2023ABC500231495 /* TemplateContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629727E2023ABC500231495 /* TemplateContentsViewController.swift */; };
 		C62972812024F4AC00231495 /* AddTemplateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972802024F4AC00231495 /* AddTemplateTableViewCell.swift */; };
-		C62972832024FD0900231495 /* TemplateDisclosureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972822024FD0900231495 /* TemplateDisclosureTableViewCell.swift */; };
-		C62972852024FD2300231495 /* TemplateDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972842024FD2300231495 /* TemplateDetailTableViewCell.swift */; };
+		C62972832024FD0900231495 /* TemplateFieldTableViewCellWithDisclosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972822024FD0900231495 /* TemplateFieldTableViewCellWithDisclosure.swift */; };
+		C62972852024FD2300231495 /* TemplateFieldTableViewCellWithDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972842024FD2300231495 /* TemplateFieldTableViewCellWithDetail.swift */; };
 		C62972892024FF3300231495 /* TemplateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62972882024FF3300231495 /* TemplateTableViewCell.swift */; };
-		C629728B2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629728A2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift */; };
-		C629728D2024FF5400231495 /* DocumentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629728C2024FF5400231495 /* DocumentDetailTableViewCell.swift */; };
+		C629728B2024FF4A00231495 /* DocumentFieldTableViewCellWithDisclosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629728A2024FF4A00231495 /* DocumentFieldTableViewCellWithDisclosure.swift */; };
+		C629728D2024FF5400231495 /* DocumentFieldTableViewCellWithDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C629728C2024FF5400231495 /* DocumentFieldTableViewCellWithDetail.swift */; };
+		C64414D4205450EA00BABAC0 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64414D3205450EA00BABAC0 /* TableViewExtensions.swift */; };
 		C6480189201C02A30099F872 /* EasyDocQueryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480188201C02A30099F872 /* EasyDocQueryError.swift */; };
 		C648018B201C0E3B0099F872 /* EasyDocParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648018A201C0E3B0099F872 /* EasyDocParsingError.swift */; };
 		C648018D201E69F40099F872 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648018C201E69F40099F872 /* SettingsTableViewController.swift */; };
@@ -27,8 +28,19 @@
 		C6480196201F8E580099F872 /* EasyDocGeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480195201F8E580099F872 /* EasyDocGeneralError.swift */; };
 		C6480198201F91C70099F872 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480197201F91C70099F872 /* DateExtensions.swift */; };
 		C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6480199201F94910099F872 /* DocumentTableViewController.swift */; };
-		C648019C201F98840099F872 /* FetchingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019B201F98840099F872 /* FetchingServices.swift */; };
+		C648019C201F98840099F872 /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019B201F98840099F872 /* UserServices.swift */; };
 		C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648019F201FA5550099F872 /* TemplatesViewController.swift */; };
+		C66E3B63204994600060AA86 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B62204994600060AA86 /* LogoutTableViewCell.swift */; };
+		C66E3B6620499AAA0060AA86 /* UserParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B6520499AA90060AA86 /* UserParser.swift */; };
+		C66E3B6820499AB20060AA86 /* DocumentParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B6720499AB20060AA86 /* DocumentParser.swift */; };
+		C66E3B6A20499B220060AA86 /* TemplateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B6920499B220060AA86 /* TemplateParser.swift */; };
+		C66E3B6D2049AE5D0060AA86 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B6C2049AE5D0060AA86 /* ViewControllerFactory.swift */; };
+		C66E3B6F204A31FC0060AA86 /* StoryboardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B6E204A31FC0060AA86 /* StoryboardFactory.swift */; };
+		C66E3B72204A76C90060AA86 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66E3B71204A76C90060AA86 /* Auth.storyboard */; };
+		C66E3B74204A79650060AA86 /* SegueIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E3B73204A79650060AA86 /* SegueIds.swift */; };
+		C66E3B76204A81E30060AA86 /* Documents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66E3B75204A81E30060AA86 /* Documents.storyboard */; };
+		C66E3B78204A81EE0060AA86 /* Templates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66E3B77204A81EE0060AA86 /* Templates.storyboard */; };
+		C66E3B7A204A81F70060AA86 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66E3B79204A81F70060AA86 /* Settings.storyboard */; };
 		C67EDC4C2029F01A00A64BCE /* Calibri Z.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC432029F01900A64BCE /* Calibri Z.TTF */; };
 		C67EDC4D2029F01A00A64BCE /* Calibri I.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC442029F01900A64BCE /* Calibri I.TTF */; };
 		C67EDC4E2029F01A00A64BCE /* Calibri B.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C67EDC452029F01900A64BCE /* Calibri B.TTF */; };
@@ -41,7 +53,8 @@
 		C6948590201B967000357129 /* EasyDocAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C694858F201B967000357129 /* EasyDocAuthError.swift */; };
 		C6948592201BAB0100357129 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948591201BAB0100357129 /* ErrorHandling.swift */; };
 		C6948596201BADA900357129 /* EasyDocError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948595201BADA900357129 /* EasyDocError.swift */; };
-		C6948598201BCC1F00357129 /* ParseObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6948597201BCC1F00357129 /* ParseObjects.swift */; };
+		C69EA4702084E7A30008B576 /* Adann's Revision.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69EA46F2084E7A30008B576 /* Adann's Revision.swift */; };
+		C6BEF94D204B70F600CDB52A /* FieldServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BEF94C204B70F600CDB52A /* FieldServices.swift */; };
 		C6D4CCBB203FF35E00CBCE8D /* TemplateServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCBA203FF35E00CBCE8D /* TemplateServices.swift */; };
 		C6D4CCBD203FFA0700CBCE8D /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */; };
 		C6D4CCBF203FFA1200CBCE8D /* UserPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */; };
@@ -51,6 +64,8 @@
 		C6DEC693202243E400309C47 /* TemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEC692202243E400309C47 /* TemplateTableViewController.swift */; };
 		C6DEC69A2022539900309C47 /* DocumentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEC6992022539900309C47 /* DocumentServices.swift */; };
 		C6DEC69C2022971600309C47 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DEC69B2022971600309C47 /* Field.swift */; };
+		C6E3670520530A310096EE00 /* EasyDocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E3670420530A310096EE00 /* EasyDocTests.swift */; };
+		C6E3670D20530B350096EE00 /* EasyDocTestsIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E3670C20530B350096EE00 /* EasyDocTestsIO.swift */; };
 		C6E8EDAA2016E5180075B729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8EDA92016E5180075B729 /* AppDelegate.swift */; };
 		C6E8EDAC2016E5180075B729 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8EDAB2016E5180075B729 /* LoginViewController.swift */; };
 		C6E8EDAF2016E5180075B729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6E8EDAD2016E5180075B729 /* Main.storyboard */; };
@@ -64,23 +79,37 @@
 		C6FABAF92018F87E0068C6ED /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABAF82018F87E0068C6ED /* Template.swift */; };
 		C6FABAFB2018FA080068C6ED /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABAFA2018FA080068C6ED /* AuthServices.swift */; };
 		C6FABAFE2018FBF70068C6ED /* AppShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FABAFD2018FBF70068C6ED /* AppShared.swift */; };
+		E1513E3CFFAF8521818249CC /* Pods_EasyDocTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBBADAD90663B42C96FF4A73 /* Pods_EasyDocTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C6E3670720530A310096EE00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8ED9E2016E5180075B729 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6E8EDA52016E5180075B729;
+			remoteInfo = EasyDoc;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1A9092BD6E781F15F85DEEA1 /* Pods_EasyDoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyDoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		827BD2A8F175569DA5C08BE6 /* Pods-EasyDoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyDoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyDoc/Pods-EasyDoc.release.xcconfig"; sourceTree = "<group>"; };
+		9A41153896BB4BCD6CA04963 /* Pods-EasyDocTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyDocTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyDocTests/Pods-EasyDocTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ACABEFCA855CF27AA93F7E2E /* Pods-EasyDoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyDoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyDoc/Pods-EasyDoc.debug.xcconfig"; sourceTree = "<group>"; };
+		B5B5047C0DD5A72B85AA3460 /* Pods-EasyDocTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyDocTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyDocTests/Pods-EasyDocTests.release.xcconfig"; sourceTree = "<group>"; };
 		C62418752020ECD200C20CFB /* UploadTemplatesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTemplatesServices.swift; sourceTree = "<group>"; };
 		C62972772023AAE500231495 /* TemplateFieldTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFieldTableViewController.swift; sourceTree = "<group>"; };
 		C62972792023AAFB00231495 /* DocumentFieldTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFieldTableViewController.swift; sourceTree = "<group>"; };
 		C629727C2023ABB400231495 /* DocumentContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentContentsViewController.swift; sourceTree = "<group>"; };
 		C629727E2023ABC500231495 /* TemplateContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateContentsViewController.swift; sourceTree = "<group>"; };
 		C62972802024F4AC00231495 /* AddTemplateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTemplateTableViewCell.swift; sourceTree = "<group>"; };
-		C62972822024FD0900231495 /* TemplateDisclosureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateDisclosureTableViewCell.swift; sourceTree = "<group>"; };
-		C62972842024FD2300231495 /* TemplateDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateDetailTableViewCell.swift; sourceTree = "<group>"; };
+		C62972822024FD0900231495 /* TemplateFieldTableViewCellWithDisclosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFieldTableViewCellWithDisclosure.swift; sourceTree = "<group>"; };
+		C62972842024FD2300231495 /* TemplateFieldTableViewCellWithDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFieldTableViewCellWithDetail.swift; sourceTree = "<group>"; };
 		C62972882024FF3300231495 /* TemplateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateTableViewCell.swift; sourceTree = "<group>"; };
-		C629728A2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDisclosureTableViewCell.swift; sourceTree = "<group>"; };
-		C629728C2024FF5400231495 /* DocumentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailTableViewCell.swift; sourceTree = "<group>"; };
+		C629728A2024FF4A00231495 /* DocumentFieldTableViewCellWithDisclosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFieldTableViewCellWithDisclosure.swift; sourceTree = "<group>"; };
+		C629728C2024FF5400231495 /* DocumentFieldTableViewCellWithDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFieldTableViewCellWithDetail.swift; sourceTree = "<group>"; };
+		C64414D3205450EA00BABAC0 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
 		C6480188201C02A30099F872 /* EasyDocQueryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocQueryError.swift; sourceTree = "<group>"; };
 		C648018A201C0E3B0099F872 /* EasyDocParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocParsingError.swift; sourceTree = "<group>"; };
 		C648018C201E69F40099F872 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -89,8 +118,19 @@
 		C6480195201F8E580099F872 /* EasyDocGeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocGeneralError.swift; sourceTree = "<group>"; };
 		C6480197201F91C70099F872 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		C6480199201F94910099F872 /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
-		C648019B201F98840099F872 /* FetchingServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingServices.swift; sourceTree = "<group>"; };
+		C648019B201F98840099F872 /* UserServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
 		C648019F201FA5550099F872 /* TemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesViewController.swift; sourceTree = "<group>"; };
+		C66E3B62204994600060AA86 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
+		C66E3B6520499AA90060AA86 /* UserParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserParser.swift; sourceTree = "<group>"; };
+		C66E3B6720499AB20060AA86 /* DocumentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentParser.swift; sourceTree = "<group>"; };
+		C66E3B6920499B220060AA86 /* TemplateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateParser.swift; sourceTree = "<group>"; };
+		C66E3B6C2049AE5D0060AA86 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		C66E3B6E204A31FC0060AA86 /* StoryboardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardFactory.swift; sourceTree = "<group>"; };
+		C66E3B71204A76C90060AA86 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		C66E3B73204A79650060AA86 /* SegueIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIds.swift; sourceTree = "<group>"; };
+		C66E3B75204A81E30060AA86 /* Documents.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Documents.storyboard; sourceTree = "<group>"; };
+		C66E3B77204A81EE0060AA86 /* Templates.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Templates.storyboard; sourceTree = "<group>"; };
+		C66E3B79204A81F70060AA86 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		C67EDC432029F01900A64BCE /* Calibri Z.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Z.TTF"; sourceTree = "<group>"; };
 		C67EDC442029F01900A64BCE /* Calibri I.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri I.TTF"; sourceTree = "<group>"; };
 		C67EDC452029F01900A64BCE /* Calibri B.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri B.TTF"; sourceTree = "<group>"; };
@@ -103,7 +143,8 @@
 		C694858F201B967000357129 /* EasyDocAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocAuthError.swift; sourceTree = "<group>"; };
 		C6948591201BAB0100357129 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		C6948595201BADA900357129 /* EasyDocError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocError.swift; sourceTree = "<group>"; };
-		C6948597201BCC1F00357129 /* ParseObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseObjects.swift; sourceTree = "<group>"; };
+		C69EA46F2084E7A30008B576 /* Adann's Revision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Adann's Revision.swift"; sourceTree = "<group>"; };
+		C6BEF94C204B70F600CDB52A /* FieldServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldServices.swift; sourceTree = "<group>"; };
 		C6D4CCBA203FF35E00CBCE8D /* TemplateServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateServices.swift; sourceTree = "<group>"; };
 		C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPersistence.swift; sourceTree = "<group>"; };
@@ -113,6 +154,10 @@
 		C6DEC692202243E400309C47 /* TemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateTableViewController.swift; sourceTree = "<group>"; };
 		C6DEC6992022539900309C47 /* DocumentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentServices.swift; sourceTree = "<group>"; };
 		C6DEC69B2022971600309C47 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		C6E3670220530A310096EE00 /* EasyDocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyDocTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E3670420530A310096EE00 /* EasyDocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocTests.swift; sourceTree = "<group>"; };
+		C6E3670620530A310096EE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6E3670C20530B350096EE00 /* EasyDocTestsIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyDocTestsIO.swift; sourceTree = "<group>"; };
 		C6E8EDA62016E5180075B729 /* EasyDoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyDoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6E8EDA92016E5180075B729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6E8EDAB2016E5180075B729 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -128,9 +173,18 @@
 		C6FABAF82018F87E0068C6ED /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		C6FABAFA2018FA080068C6ED /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
 		C6FABAFD2018FBF70068C6ED /* AppShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShared.swift; sourceTree = "<group>"; };
+		EBBADAD90663B42C96FF4A73 /* Pods_EasyDocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyDocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C6E366FF20530A310096EE00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1513E3CFFAF8521818249CC /* Pods_EasyDocTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6E8EDA32016E5180075B729 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,8 +220,8 @@
 			children = (
 				C62972882024FF3300231495 /* TemplateTableViewCell.swift */,
 				C62972802024F4AC00231495 /* AddTemplateTableViewCell.swift */,
-				C62972822024FD0900231495 /* TemplateDisclosureTableViewCell.swift */,
-				C62972842024FD2300231495 /* TemplateDetailTableViewCell.swift */,
+				C62972822024FD0900231495 /* TemplateFieldTableViewCellWithDisclosure.swift */,
+				C62972842024FD2300231495 /* TemplateFieldTableViewCellWithDetail.swift */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -176,18 +230,27 @@
 			isa = PBXGroup;
 			children = (
 				C648018F201ECAB50099F872 /* DocumentTableViewCell.swift */,
-				C629728A2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift */,
-				C629728C2024FF5400231495 /* DocumentDetailTableViewCell.swift */,
+				C629728A2024FF4A00231495 /* DocumentFieldTableViewCellWithDisclosure.swift */,
+				C629728C2024FF5400231495 /* DocumentFieldTableViewCellWithDetail.swift */,
 			);
 			path = Documents;
+			sourceTree = "<group>";
+		};
+		C64414D5205456AE00BABAC0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C67EDC422029F01900A64BCE /* calibri */,
+				C67EDC472029F01900A64BCE /* champagne_limousines */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C648018E201ECAAA0099F872 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				C6D4CCC4204006E800CBCE8D /* CellFactory.swift */,
 				C62972872024FE9500231495 /* Documents */,
 				C62972862024FE8E00231495 /* Templates */,
+				C66E3B61204994320060AA86 /* Settings */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -218,6 +281,46 @@
 				C648018C201E69F40099F872 /* SettingsTableViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		C66E3B5F204992940060AA86 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */,
+				C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */,
+				C6D4CCC0203FFA2800CBCE8D /* TemplatePersistence.swift */,
+				C6D4CCC2203FFA3600CBCE8D /* DocumentPersistence.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		C66E3B602049929D0060AA86 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				C66E3B6520499AA90060AA86 /* UserParser.swift */,
+				C66E3B6720499AB20060AA86 /* DocumentParser.swift */,
+				C66E3B6920499B220060AA86 /* TemplateParser.swift */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		C66E3B61204994320060AA86 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C66E3B62204994600060AA86 /* LogoutTableViewCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C66E3B70204A34CC0060AA86 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4CCC4204006E800CBCE8D /* CellFactory.swift */,
+				C66E3B6E204A31FC0060AA86 /* StoryboardFactory.swift */,
+				C66E3B6C2049AE5D0060AA86 /* ViewControllerFactory.swift */,
+				C66E3B73204A79650060AA86 /* SegueIds.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		C67EDC422029F01900A64BCE /* calibri */ = {
@@ -269,21 +372,26 @@
 			isa = PBXGroup;
 			children = (
 				C6480197201F91C70099F872 /* DateExtensions.swift */,
+				C64414D3205450EA00BABAC0 /* TableViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C6DEC69820224CA800309C47 /* ded */ = {
+		C6E3670320530A310096EE00 /* EasyDocTests */ = {
 			isa = PBXGroup;
 			children = (
+				C6E3670C20530B350096EE00 /* EasyDocTestsIO.swift */,
+				C6E3670420530A310096EE00 /* EasyDocTests.swift */,
+				C6E3670620530A310096EE00 /* Info.plist */,
 			);
-			path = ded;
+			path = EasyDocTests;
 			sourceTree = "<group>";
 		};
 		C6E8ED9D2016E5180075B729 = {
 			isa = PBXGroup;
 			children = (
 				C6E8EDA82016E5180075B729 /* EasyDoc */,
+				C6E3670320530A310096EE00 /* EasyDocTests */,
 				C6E8EDA72016E5180075B729 /* Products */,
 				E47A489102471E16D292FFF7 /* Pods */,
 				E60B02C64222FC7F732C7D10 /* Frameworks */,
@@ -294,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				C6E8EDA62016E5180075B729 /* EasyDoc.app */,
+				C6E3670220530A310096EE00 /* EasyDocTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,10 +410,9 @@
 		C6E8EDA82016E5180075B729 /* EasyDoc */ = {
 			isa = PBXGroup;
 			children = (
-				C67EDC422029F01900A64BCE /* calibri */,
-				C67EDC472029F01900A64BCE /* champagne_limousines */,
-				C694858E201AC14400357129 /* plist files */,
 				C6E8EDC72017CFE10075B729 /* Notes */,
+				C64414D5205456AE00BABAC0 /* Fonts */,
+				C694858E201AC14400357129 /* plist files */,
 				C6FABAFC2018FBDE0068C6ED /* AppShared */,
 				C6FABAF52018F75B0068C6ED /* Documents */,
 				C6FABAEE2018F6B20068C6ED /* Actors */,
@@ -316,13 +424,17 @@
 			path = EasyDoc;
 			sourceTree = "<group>";
 		};
-		C6E8EDBD2016EFDE0075B729 /* Views */ = {
+		C6E8EDBD2016EFDE0075B729 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				C6E8EDB22016E5180075B729 /* LaunchScreen.storyboard */,
 				C6E8EDAD2016E5180075B729 /* Main.storyboard */,
+				C66E3B71204A76C90060AA86 /* Auth.storyboard */,
+				C66E3B75204A81E30060AA86 /* Documents.storyboard */,
+				C66E3B77204A81EE0060AA86 /* Templates.storyboard */,
+				C66E3B79204A81F70060AA86 /* Settings.storyboard */,
 			);
-			path = Views;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		C6E8EDBE2016EFEA0075B729 /* Controllers */ = {
@@ -340,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				C6E8EDC52017CFDB0075B729 /* Notes.swift */,
+				C69EA46F2084E7A30008B576 /* Adann's Revision.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -348,9 +461,10 @@
 			isa = PBXGroup;
 			children = (
 				C6FABAFA2018FA080068C6ED /* AuthServices.swift */,
-				C648019B201F98840099F872 /* FetchingServices.swift */,
+				C648019B201F98840099F872 /* UserServices.swift */,
 				C6DEC6992022539900309C47 /* DocumentServices.swift */,
 				C6D4CCBA203FF35E00CBCE8D /* TemplateServices.swift */,
+				C6BEF94C204B70F600CDB52A /* FieldServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -358,11 +472,8 @@
 		C6FABAED2018F5B80068C6ED /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				C6948597201BCC1F00357129 /* ParseObjects.swift */,
-				C6D4CCBC203FFA0700CBCE8D /* FirebaseManager.swift */,
-				C6D4CCBE203FFA1200CBCE8D /* UserPersistence.swift */,
-				C6D4CCC0203FFA2800CBCE8D /* TemplatePersistence.swift */,
-				C6D4CCC2203FFA3600CBCE8D /* DocumentPersistence.swift */,
+				C66E3B602049929D0060AA86 /* Parse */,
+				C66E3B5F204992940060AA86 /* Database */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -406,10 +517,10 @@
 		C6FABB0520190CD10068C6ED /* Front-end */ = {
 			isa = PBXGroup;
 			children = (
-				C6DEC69820224CA800309C47 /* ded */,
+				C66E3B70204A34CC0060AA86 /* Factories */,
 				C648018E201ECAAA0099F872 /* Cells */,
 				C6E8EDBE2016EFEA0075B729 /* Controllers */,
-				C6E8EDBD2016EFDE0075B729 /* Views */,
+				C6E8EDBD2016EFDE0075B729 /* Storyboards */,
 			);
 			path = "Front-end";
 			sourceTree = "<group>";
@@ -429,6 +540,8 @@
 			children = (
 				ACABEFCA855CF27AA93F7E2E /* Pods-EasyDoc.debug.xcconfig */,
 				827BD2A8F175569DA5C08BE6 /* Pods-EasyDoc.release.xcconfig */,
+				9A41153896BB4BCD6CA04963 /* Pods-EasyDocTests.debug.xcconfig */,
+				B5B5047C0DD5A72B85AA3460 /* Pods-EasyDocTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -437,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				1A9092BD6E781F15F85DEEA1 /* Pods_EasyDoc.framework */,
+				EBBADAD90663B42C96FF4A73 /* Pods_EasyDocTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -444,6 +558,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C6E3670120530A310096EE00 /* EasyDocTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6E3670920530A310096EE00 /* Build configuration list for PBXNativeTarget "EasyDocTests" */;
+			buildPhases = (
+				84907F2259766F398767A8A2 /* [CP] Check Pods Manifest.lock */,
+				C6E366FE20530A310096EE00 /* Sources */,
+				C6E366FF20530A310096EE00 /* Frameworks */,
+				C6E3670020530A310096EE00 /* Resources */,
+				0DFB9D5ABD05F3E77D834F1E /* [CP] Embed Pods Frameworks */,
+				4E21F469A5AC1D6B1C64BF17 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6E3670820530A310096EE00 /* PBXTargetDependency */,
+			);
+			name = EasyDocTests;
+			productName = EasyDocTests;
+			productReference = C6E3670220530A310096EE00 /* EasyDocTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C6E8EDA52016E5180075B729 /* EasyDoc */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6E8EDB82016E5180075B729 /* Build configuration list for PBXNativeTarget "EasyDoc" */;
@@ -471,9 +606,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Rodrigo Hilkner";
 				TargetAttributes = {
+					C6E3670120530A310096EE00 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C6E8EDA52016E5180075B729;
+					};
 					C6E8EDA52016E5180075B729 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -494,11 +634,19 @@
 			projectRoot = "";
 			targets = (
 				C6E8EDA52016E5180075B729 /* EasyDoc */,
+				C6E3670120530A310096EE00 /* EasyDocTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C6E3670020530A310096EE00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6E8EDA42016E5180075B729 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -507,12 +655,16 @@
 				C6E8EDB42016E5180075B729 /* LaunchScreen.storyboard in Resources */,
 				C67EDC4E2029F01A00A64BCE /* Calibri B.TTF in Resources */,
 				C694858D201AC13700357129 /* GoogleService-Info.plist in Resources */,
+				C66E3B78204A81EE0060AA86 /* Templates.storyboard in Resources */,
 				C67EDC502029F01A00A64BCE /* Champagne & Limousines I.ttf in Resources */,
 				C6E8EDB12016E5180075B729 /* Assets.xcassets in Resources */,
 				C67EDC4C2029F01A00A64BCE /* Calibri Z.TTF in Resources */,
 				C67EDC512029F01A00A64BCE /* Champagne & Limousines Z.ttf in Resources */,
 				C67EDC532029F01A00A64BCE /* Champagne & Limousines.ttf in Resources */,
+				C66E3B72204A76C90060AA86 /* Auth.storyboard in Resources */,
+				C66E3B7A204A81F70060AA86 /* Settings.storyboard in Resources */,
 				C67EDC4F2029F01A00A64BCE /* Calibri.ttf in Resources */,
+				C66E3B76204A81E30060AA86 /* Documents.storyboard in Resources */,
 				C67EDC4D2029F01A00A64BCE /* Calibri I.TTF in Resources */,
 				C6E8EDAF2016E5180075B729 /* Main.storyboard in Resources */,
 			);
@@ -521,6 +673,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0DFB9D5ABD05F3E77D834F1E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyDocTests/Pods-EasyDocTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E21F469A5AC1D6B1C64BF17 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EasyDocTests/Pods-EasyDocTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		56D94F93CE5B61F79023E19C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -533,6 +715,24 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-EasyDoc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84907F2259766F398767A8A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EasyDocTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -581,6 +781,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C6E366FE20530A310096EE00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6E3670D20530B350096EE00 /* EasyDocTestsIO.swift in Sources */,
+				C6E3670520530A310096EE00 /* EasyDocTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6E8EDA22016E5180075B729 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -593,6 +802,7 @@
 				C62418762020ECD200C20CFB /* UploadTemplatesServices.swift in Sources */,
 				C6FABAFE2018FBF70068C6ED /* AppShared.swift in Sources */,
 				C6948596201BADA900357129 /* EasyDocError.swift in Sources */,
+				C66E3B6620499AAA0060AA86 /* UserParser.swift in Sources */,
 				C6480190201ECAB50099F872 /* DocumentTableViewCell.swift in Sources */,
 				C6480194201F87FA0099F872 /* EasyDocOfflineError.swift in Sources */,
 				C6948590201B967000357129 /* EasyDocAuthError.swift in Sources */,
@@ -604,35 +814,51 @@
 				C6E8EDAC2016E5180075B729 /* LoginViewController.swift in Sources */,
 				C6D4CCC1203FFA2800CBCE8D /* TemplatePersistence.swift in Sources */,
 				C6480196201F8E580099F872 /* EasyDocGeneralError.swift in Sources */,
-				C62972832024FD0900231495 /* TemplateDisclosureTableViewCell.swift in Sources */,
-				C629728D2024FF5400231495 /* DocumentDetailTableViewCell.swift in Sources */,
+				C62972832024FD0900231495 /* TemplateFieldTableViewCellWithDisclosure.swift in Sources */,
+				C66E3B6A20499B220060AA86 /* TemplateParser.swift in Sources */,
+				C66E3B6D2049AE5D0060AA86 /* ViewControllerFactory.swift in Sources */,
+				C629728D2024FF5400231495 /* DocumentFieldTableViewCellWithDetail.swift in Sources */,
 				C6E8EDAA2016E5180075B729 /* AppDelegate.swift in Sources */,
 				C6FABAF92018F87E0068C6ED /* Template.swift in Sources */,
-				C648019C201F98840099F872 /* FetchingServices.swift in Sources */,
+				C648019C201F98840099F872 /* UserServices.swift in Sources */,
 				C62972812024F4AC00231495 /* AddTemplateTableViewCell.swift in Sources */,
 				C6D4CCBD203FFA0700CBCE8D /* FirebaseManager.swift in Sources */,
 				C6DEC69A2022539900309C47 /* DocumentServices.swift in Sources */,
 				C6FABAF72018F76C0068C6ED /* Document.swift in Sources */,
+				C66E3B6F204A31FC0060AA86 /* StoryboardFactory.swift in Sources */,
 				C6D4CCC5204006E800CBCE8D /* CellFactory.swift in Sources */,
+				C6BEF94D204B70F600CDB52A /* FieldServices.swift in Sources */,
 				C62972892024FF3300231495 /* TemplateTableViewCell.swift in Sources */,
 				C6FABAF22018F70E0068C6ED /* MainUser.swift in Sources */,
 				C6DEC69C2022971600309C47 /* Field.swift in Sources */,
-				C62972852024FD2300231495 /* TemplateDetailTableViewCell.swift in Sources */,
-				C629728B2024FF4A00231495 /* DocumentDisclosureTableViewCell.swift in Sources */,
+				C62972852024FD2300231495 /* TemplateFieldTableViewCellWithDetail.swift in Sources */,
+				C629728B2024FF4A00231495 /* DocumentFieldTableViewCellWithDisclosure.swift in Sources */,
 				C648018B201C0E3B0099F872 /* EasyDocParsingError.swift in Sources */,
+				C66E3B6820499AB20060AA86 /* DocumentParser.swift in Sources */,
+				C69EA4702084E7A30008B576 /* Adann's Revision.swift in Sources */,
 				C629727D2023ABB400231495 /* DocumentContentsViewController.swift in Sources */,
+				C66E3B74204A79650060AA86 /* SegueIds.swift in Sources */,
 				C6D4CCBB203FF35E00CBCE8D /* TemplateServices.swift in Sources */,
 				C64801A0201FA5550099F872 /* TemplatesViewController.swift in Sources */,
 				C6D4CCBF203FFA1200CBCE8D /* UserPersistence.swift in Sources */,
 				C648019A201F94910099F872 /* DocumentTableViewController.swift in Sources */,
 				C648018D201E69F40099F872 /* SettingsTableViewController.swift in Sources */,
+				C66E3B63204994600060AA86 /* LogoutTableViewCell.swift in Sources */,
 				C6948592201BAB0100357129 /* ErrorHandling.swift in Sources */,
-				C6948598201BCC1F00357129 /* ParseObjects.swift in Sources */,
 				C6FABAFB2018FA080068C6ED /* AuthServices.swift in Sources */,
+				C64414D4205450EA00BABAC0 /* TableViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C6E3670820530A310096EE00 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6E8EDA52016E5180075B729 /* EasyDoc */;
+			targetProxy = C6E3670720530A310096EE00 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C6E8EDAD2016E5180075B729 /* Main.storyboard */ = {
@@ -654,6 +880,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C6E3670A20530A310096EE00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A41153896BB4BCD6CA04963 /* Pods-EasyDocTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HMM2SSNKR5;
+				INFOPLIST_FILE = EasyDocTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xpt.EasyDocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyDoc.app/EasyDoc";
+			};
+			name = Debug;
+		};
+		C6E3670B20530A310096EE00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5B5047C0DD5A72B85AA3460 /* Pods-EasyDocTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HMM2SSNKR5;
+				INFOPLIST_FILE = EasyDocTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = xpt.EasyDocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EasyDoc.app/EasyDoc";
+			};
+			name = Release;
+		};
 		C6E8EDB62016E5180075B729 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -668,6 +928,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -675,6 +936,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -725,6 +987,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -732,6 +995,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -822,6 +1086,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C6E3670920530A310096EE00 /* Build configuration list for PBXNativeTarget "EasyDocTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6E3670A20530A310096EE00 /* Debug */,
+				C6E3670B20530A310096EE00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C6E8EDA12016E5180075B729 /* Build configuration list for PBXProject "EasyDoc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

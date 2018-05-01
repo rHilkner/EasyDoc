@@ -10,22 +10,20 @@ import UIKit
 
 class DocumentFieldTableViewController: UITableViewController {
     
-    var field: Field?
+    var fields: [Field]?
+    var navigationTitle: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.field == nil {
+        if self.fields == nil {
             print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentFieldTableViewController.viewDidLoad()")
             self.dismiss(animated: true, completion: nil)
             return
         }
         
-        self.loadViewController()
-    }
-    
-    func loadViewController() {
-        self.navigationItem.title = self.field!.key
+        // Setting view controller title
+        self.navigationItem.title = self.navigationTitle
     }
 }
 
@@ -33,258 +31,156 @@ class DocumentFieldTableViewController: UITableViewController {
 // MARK: - Table view data source
 extension DocumentFieldTableViewController {
     
-    func sectionCount() -> Int {
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentFieldTableViewController.viewDidLoad()")
-            return 0
-        }
-        
-        for field in valueFields {
-            if field.type != "dict" {
-                return 1
-            }
-        }
-        
-        return valueFields.count
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sectionCount()
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentFieldTableViewController.viewDidLoad()")
-            return 0
-        }
-        
-        if self.sectionCount() == 1 {
-            return valueFields.count
-        }
-        
-        guard let sectionFields = valueFields[section].value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(numberOfRowsInSection)")
-            return 0
-        }
-        
-        return sectionFields.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let section = indexPath.section
-        let row = indexPath.row
-        
-        // Getting fields list from self.field.value
-        guard let fieldsList = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentFieldTableViewController.viewDidLoad()")
-            return UITableViewCell()
-        }
-        
-        // If number of sections is 1, then all fields of the field are gonna be cells
-        if self.sectionCount() == 1 {
-            let cellField = fieldsList[row]
-            
-            // Verifying which type of cell we need to cast
-            if cellField.type == "dict" {
-                let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
-                
-                cell.titleLabel.text = cellField.key
-                
-                return cell
-                
-            } else {
-                let cell = CellFactory.documentCell(tableView: tableView, type: .withDetail) as! DocumentDetailTableViewCell
-                
-                cell.titleLabel.text = cellField.key
-                
-                if let cellValue = cellField.value as? String, cellValue != "" {
-                    cell.detailLabel.text = cellValue
-                } else {
-                    cell.detailLabel.text = "-"
-                }
-                
-                return cell
-            }
-        }
-        
-        // Getting fields of the determined section
-        guard let sectionFields = fieldsList[section].value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ DocumentFieldTableViewController.tableView(cellForRowAt)")
-            return UITableViewCell()
-        }
-        
-        // Getting field of the determined cell
-        let cellField = sectionFields[row]
-        
-        // Verifying which type of cell we need to cast
-        if cellField.type == "dict" {
-            let cell = CellFactory.documentCell(tableView: tableView, type: .withDisclosure) as! DocumentDisclosureTableViewCell
-            
-            cell.titleLabel.text = cellField.key
-            
-            return cell
-            
-        } else {
-            let cell = CellFactory.documentCell(tableView: tableView, type: .withDetail) as! DocumentDetailTableViewCell
-            
-            cell.titleLabel.text = cellField.key
-            
-            if let cellValue = cellField.value as? String, cellValue != "" {
-                cell.detailLabel.text = cellValue
-            } else {
-                cell.detailLabel.text = "-"
-            }
-            
-            return cell
-        }
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        // If there's only one section for the presentation of the fields, then there's no section header
-        if self.sectionCount() == 1 {
-            return nil
-        }
-        
-        // Else, set the headers as the key of the field of that index
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentFieldTableViewController.viewDidLoad()")
-            return nil
-        }
-        
-        return valueFields[section].key
-    }
-    
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         // Setting heights of all cells equal to the standard height of the UITableViewCell
         return UITableViewCell().frame.height
     }
     
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        var numberOfSections: Int
+        
+        // Verifying if fields are multi-section
+        if FieldServices.hasMultipleFieldSections(fields: self.fields!) {
+            numberOfSections = self.fields!.count
+        } else {
+            numberOfSections = 1
+        }
+        
+        return numberOfSections
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        var sectionTitle: String?
+        
+        // If fields are multi-section, then each of their keys are the headers
+        if FieldServices.hasMultipleFieldSections(fields: self.fields!) {
+            sectionTitle = self.fields![section].key
+            
+        // If fields are single-section, there's no header
+        } else {
+            sectionTitle = nil
+        }
+            
+        return sectionTitle
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let rowsInSection: Int
+        
+        if FieldServices.hasMultipleFieldSections(fields: self.fields!) {
+            // Field keys are headers and their children are cells
+            let sectionFields = self.fields![section].value as! [Field]
+            
+            rowsInSection = sectionFields.count
+        } else {
+            // Every field is a cell
+            rowsInSection = self.fields!.count
+        }
+        
+        return rowsInSection
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell: UITableViewCell
+        
+        // Getting field corresponding to wanted cell
+        let cellField = FieldServices.getField(fields: self.fields!, cellForRowAt: indexPath)
+        
+        switch cellField.type {
+            
+        // .dict: return document dict cell
+        case .dict:
+            cell = CellFactory.documentFieldDictCell(tableView: tableView, title: cellField.key)
+            
+        // .string: return document string cell
+        case .string:
+            cell = CellFactory.documentFieldStringCell(tableView: tableView, title: cellField.key, detail: cellField.value as? String)
+            
+        }
+        
+        return cell
+    }
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         // Deselecting the selected cell
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        // Getting section and row values
-        let section = indexPath.section
-        let row = indexPath.row
+        // Getting field corresponding to wanted cell
+        let cellField = FieldServices.getField(fields: self.fields!, cellForRowAt: indexPath)
         
-        // Getting fields from self.field.value
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentFieldTableViewController.viewDidLoad()")
-            return
-        }
+        switch cellField.type {
         
-        // If there's only one section, the selected cell is self.fields[row]
-        if self.sectionCount() == 1 {
-            if valueFields[row].type == "dict" {
-                self.goToDocumentFieldTableViewController(field: valueFields[row])
-            } else {
-                self.openFillingFieldAlert(field: valueFields[row])
-            }
+        // .dict: open cell's field view controller
+        case .dict:
+            self.goToDocumentFieldTableViewController(field: self.fields![indexPath.row])
             
-            return
-        }
-        
-        // If there's more than one section, the selected cell is a field child of self.fields[section].value[row]
-        guard let sectionFields = valueFields[section].value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.tableView(didSelectRowAt)")
-            return
-        }
-        
-        // Getting the field of the selected cell
-        let cellField = sectionFields[row]
-        
-        // If the selected cell is a dictionary, then open this field's view controller
-        if cellField.type == "dict" {
-            self.goToDocumentFieldTableViewController(field: cellField)
+        // .string: open alert to fill field
+        case .string:
+            self.openFillingFieldAlert(field: self.fields![indexPath.row])
             
-        // Else, open alert to fill it's value
-        } else {
-            self.openFillingFieldAlert(field: cellField)
         }
     }
     
 }
 
 
+// Handling segues and pushing view controllers
 extension DocumentFieldTableViewController {
     
-    /// Goes to selected field view controller
+    /// Goes to selected field's view controller
     func goToDocumentFieldTableViewController(field: Field) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        guard let documentFieldTableViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentFieldTableViewController") as? DocumentFieldTableViewController else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ DocumentTableViewController.goToDocumentFieldTableViewController()")
-            return
-        }
+        let documentFieldVC = ViewControllerFactory.instantiateViewController(ofType: .documentField) as! DocumentFieldTableViewController
         
-        documentFieldTableViewController.field = field
+        documentFieldVC.fields = (field.value as! [Field])
+        documentFieldVC.navigationTitle = field.key
         
-        self.navigationController?.pushViewController(documentFieldTableViewController, animated: true)
+        self.navigationController?.pushViewController(documentFieldVC, animated: true)
     }
     
+}
+
+
+// Handling alerts/textfields
+extension DocumentFieldTableViewController {
     
     /// Opens alert for filling the field's value
     func openFillingFieldAlert(field: Field) {
-        // Creating the alert controller
-        let alert = UIAlertController(title: field.key, message: "Insira o valor abaixo", preferredStyle: .alert)
         
-        // Adding the text field
-        alert.addTextField {
-            (textField) in
+        // Tries to fill field using an alert with textfield
+        FieldServices.displayFillingFieldAlert(field: field, viewController: self) {
+            (success) in
             
-            textField.autocapitalizationType = .sentences
-            textField.placeholder = field.key
-            textField.text = (field.value as! String)
-        }
-        
-        // Grabbing the value from the text field when the user clicks OK
-        let settingValueAction = UIAlertAction(title: "OK", style: .default) {
-            _ in
-            
-            let textField = alert.textFields![0] // Force unwrapping because we know it exists
-            
-            guard let text = textField.text, text != "" else {
-                print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentTableViewController.openFillingFieldAlert()")
+            if !success {
+                self.handleSettingFieldError()
                 return
             }
             
-            DocumentServices.setValueToField(field: field, value: text) {
-                error in
-                
-                if error != nil {
-                    self.handleSettingValueError()
-                    return
-                }
-                
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
-        
-        alert.addAction(settingValueAction)
-        
-        // Presenting the alert
-        self.present(alert, animated: true, completion: nil)
     }
+    
 }
 
 
+// Handling errors
 extension DocumentFieldTableViewController {
     
     /// Handles setting value error and presents it to the user
-    func handleSettingValueError() {
+    func handleSettingFieldError() {
         
-        // Creating and presenting alert
-        let alert = UIAlertController(title: "Erro ao definir valor", message: "Verifique sua conexão com a internet e tente novamente.", preferredStyle: UIAlertControllerStyle.alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        // Displays error from unsuccessfully setting a field with a value
+        FieldServices.displaySettingFieldErrorAlert(viewController: self, completionHandler: nil)
     }
 }

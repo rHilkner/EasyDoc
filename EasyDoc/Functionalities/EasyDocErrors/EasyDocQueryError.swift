@@ -41,8 +41,8 @@ public enum EasyDocQueryError: EasyDocError {
 }
 
 
-extension EasyDocQueryError: LocalizedError {
-    public var errorDescription: String {
+extension EasyDocQueryError {
+    public var description: String {
         switch self {
         case .networkError:
             return NSLocalizedString("An internet network error occured.", comment: "")

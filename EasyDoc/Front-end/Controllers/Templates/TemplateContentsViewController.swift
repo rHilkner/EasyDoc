@@ -18,17 +18,12 @@ class TemplateContentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if template == nil {
+        if self.template == nil {
             print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateContentsViewController.viewDidLoad()")
             self.dismiss(animated: true, completion: nil)
             return
         }
         
-        self.loadViewController()
-    }
-    
-    
-    func loadViewController() {
         self.navigationItem.title = "Visualizar documento"
         
         self.contentsLabel.text = TemplateServices.readContents(template: template!)

@@ -1,5 +1,5 @@
 //
-//  DocumentDetailTableViewCell.swift
+//  DocumentDisclosureTableViewCell.swift
 //  EasyDoc
 //
 //  Created by Rodrigo Hilkner on 02/02/18.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class DocumentDetailTableViewCell: UITableViewCell {
+class DocumentFieldTableViewCellWithDisclosure: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
     
 }

@@ -8,31 +8,14 @@
 
 import Foundation
 
-class DocumentType {
-    static let dict: String = "dict"
-}
 
 class DocumentServices {
     
-    /// Returns number of sections that a field being presented on screen
-    static func multipleSections(fields: [String : [String : Any]]) -> Int {
-        
-        // If all fields are dictionaries, then they are all sections and their keys are all headers
-        for field in fields {
-            // Verifying parsing error
-            guard let fieldType = field.value["type"] as? String else {
-                print("-> WARNING: EasyDocParsingError.document @ DocumentServices.numberOfSections()")
-                return 0
-            }
-            
-            if fieldType != DocumentType.dict {
-                return 0
-            }
-        }
-        
-        return fields.count
-    }
-    
+}
+
+
+// Online services
+extension DocumentServices {
     
     /// Adds a given document to the main user in-app and into the EasyDoc's database
     static func addDocumentToUser(_ newDocument: Document, completionHandler: @escaping (EasyDocError?) -> Void) {
@@ -48,7 +31,7 @@ class DocumentServices {
             }
             
             // In case of success, add the document to user object
-            AppShared.mainUser!.documents.append(newDocument)
+            AppShared.mainUser!.documents.insert(newDocument, at: 0)
             completionHandler(nil)
         }
     }
@@ -97,10 +80,10 @@ class DocumentServices {
     
     
     /// Deletes a document from the user's database and in-app
-    static func deleteDocument(autoID: String, completionHandler: @escaping (EasyDocError?) -> Void) {
+    static func deleteDocument(_ document: Document, completionHandler: @escaping (EasyDocError?) -> Void) {
         
         // Deleting the document from the database
-        DocumentPersistence.deleteDocument(autoID: autoID) {
+        DocumentPersistence.deleteDocument(document) {
             _error in
             
             if let error = _error {
@@ -112,13 +95,40 @@ class DocumentServices {
             // Deleting the document in-app
             for i in 0 ..< AppShared.mainUser!.documents.count {
                 
-                if AppShared.mainUser!.documents[i].autoID == autoID {
+                if AppShared.mainUser!.documents[i] == document {
                     AppShared.mainUser!.documents.remove(at: i)
+                    break
                 }
             }
             
             completionHandler(nil)
+            return
         }
+    }
+    
+}
+
+
+// Offline services
+extension DocumentServices {
+    
+    /// Returns number of sections that a field being presented on screen
+    static func multipleSections(fields: [String : [String : Any]]) -> Int {
+        
+        // If all fields are dictionaries, then they are all sections and their keys are all headers
+        for field in fields {
+            // Verifying parsing error
+            guard let fieldType = field.value["type"] as? String else {
+                print("-> WARNING: EasyDocParsingError.document @ DocumentServices.numberOfSections()")
+                return 0
+            }
+            
+            if fieldType != FieldType.dict.rawValue {
+                return 0
+            }
+        }
+        
+        return fields.count
     }
     
     

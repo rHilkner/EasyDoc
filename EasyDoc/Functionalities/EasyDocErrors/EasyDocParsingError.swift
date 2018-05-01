@@ -28,8 +28,8 @@ public enum EasyDocParsingError: EasyDocError {
     
 }
 
-extension EasyDocParsingError: LocalizedError {
-    public var errorDescription: String {
+extension EasyDocParsingError {
+    public var description: String {
         switch self {
         case .snapshot:
             return NSLocalizedString("An error occurred when parsing a database snapshot.", comment: "")

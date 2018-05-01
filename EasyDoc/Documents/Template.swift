@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Template {
+struct Template {
     var type: String
     var contents: String
     var fields: [Field]

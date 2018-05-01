@@ -1,5 +1,5 @@
 //
-//  TemplateDetailTableViewCell.swift
+//  TemplateDisclosureTableViewCell.swift
 //  EasyDoc
 //
 //  Created by Rodrigo Hilkner on 02/02/18.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class TemplateDetailTableViewCell: UITableViewCell {
-
+class TemplateFieldTableViewCellWithDisclosure: UITableViewCell {
+    
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
-
+    
 }

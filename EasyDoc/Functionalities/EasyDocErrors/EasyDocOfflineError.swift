@@ -19,8 +19,8 @@ public enum EasyDocOfflineError: EasyDocError {
     case castingError
 }
 
-extension EasyDocOfflineError: LocalizedError {
-    public var errorDescription: String {
+extension EasyDocOfflineError {
+    public var description: String {
         switch self {
         case .inAppLoginError:
             return NSLocalizedString("An error occurred when trying to make in-app login.", comment: "")

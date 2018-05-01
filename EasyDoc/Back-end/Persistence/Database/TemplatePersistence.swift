@@ -40,7 +40,7 @@ class TemplatePersistence {
                 }
                 
                 // Parsing template object
-                guard let templateObject = ParseObjects.parseTemplateDictionary(templateDict, autoID: templateSnapshot.key) else {
+                guard let templateObject = TemplateParser.parseTemplateDictionary(templateDict, autoID: templateSnapshot.key) else {
                     print("-> WARNING: EasyDocParsingError.template @ DatabaseManager.fetchTemplates()")
                     completionHandler(nil, EasyDocParsingError.template)
                     return

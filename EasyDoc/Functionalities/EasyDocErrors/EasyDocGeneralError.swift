@@ -16,11 +16,11 @@ public enum EasyDocGeneralError: EasyDocError {
     case unexpectedError
 }
 
-extension EasyDocGeneralError: LocalizedError {
-    public var errorDescription: String {
+extension EasyDocGeneralError {
+    public var description: String {
         switch self {
         case .unexpectedError:
-            return NSLocalizedString("An unexpected error occured.", comment: "")
+            return NSLocalizedString("An unexpected error occurred.", comment: "")
         }
     }
 }

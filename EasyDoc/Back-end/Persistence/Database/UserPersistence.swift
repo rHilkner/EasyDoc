@@ -18,7 +18,7 @@ class UserPersistence {
         let userRef = FirebaseManager.databaseReference.child("users").childByAutoId()
         
         // Creating dictionary for the new user with given email and password
-        let newUserDict = ParseObjects.createNewUserDictionary(email: email)
+        let newUserDict = UserParser.createNewUserDictionary(email: email)
         
         // Inputing user object's dictionary on EasyDoc's Database
         userRef.setValue(newUserDict) {
@@ -69,7 +69,7 @@ class UserPersistence {
             }
             
             // Parsing user's dictionary
-            guard let userFetched = ParseObjects.parseMainUserDictionary(userDict, autoID: userSnapshot.key) else {
+            guard let userFetched = UserParser.parseMainUserDictionary(userDict, autoID: userSnapshot.key) else {
                 print("-> WARNING: EasyDocParsingError.mainUser @ DatabaseManager.fetchMainUser()")
                 completionHandler(nil, EasyDocParsingError.mainUser)
                 return

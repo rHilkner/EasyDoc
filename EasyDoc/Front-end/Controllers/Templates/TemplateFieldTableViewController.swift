@@ -10,23 +10,21 @@ import UIKit
 
 class TemplateFieldTableViewController: UITableViewController {
     
-    var field: Field?
-    var pathToSave: String?
+    var fields: [Field]?
+    var navigationTitle: String?
+    let sectionsBeforeFieldsSection = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.field == nil {
+        if self.fields == nil {
             print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateFieldTableViewController.viewDidLoad()")
             self.dismiss(animated: true, completion: nil)
             return
         }
         
-        self.loadViewController()
-    }
-    
-    func loadViewController() {
-        self.navigationItem.title = self.field!.key
+        // Setting view controller title
+        self.navigationItem.title = self.navigationTitle
     }
 }
 
@@ -34,167 +32,160 @@ class TemplateFieldTableViewController: UITableViewController {
 // MARK: - Table view data source
 extension TemplateFieldTableViewController {
     
-    func sectionCount() -> Int {
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateFieldTableViewController.viewDidLoad()")
-            return 0
-        }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        for field in valueFields {
-            if field.type != "dict" {
-                return 1
-            }
-        }
-        
-        return valueFields.count
+        // Setting heights of all cells equal to the standard height of the UITableViewCell
+        return UITableViewCell().frame.height
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sectionCount()
+        let numberOfSections: Int
+        
+        // Verifying if fields are multi-section
+        if FieldServices.hasMultipleFieldSections(fields: self.fields!) {
+            numberOfSections = self.sectionsBeforeFieldsSection + self.fields!.count
+        } else {
+            numberOfSections = self.sectionsBeforeFieldsSection + 1
+        }
+        
+        return numberOfSections
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        let sectionTitle: String?
+        
+        switch section {
+            
+        // First section doesn't have a header
+        case 0:
+            sectionTitle = nil
+            
+        // Other sections depends on case of multiple field sections
+        default:
+            
+            // If fields are multi-section, then each of their keys are the headers
+            if FieldServices.hasMultipleFieldSections(fields: self.fields!) {
+                sectionTitle = self.fields![section-self.sectionsBeforeFieldsSection].key
+                
+            // If fields are single-section, there's no header
+            } else {
+                sectionTitle = nil
+            }
+        }
+        
+        return sectionTitle
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateFieldTableViewController.viewDidLoad()")
-            return 0
+        
+        let rowsInSection: Int
+        
+        switch section {
+            
+        // First section has a cell is for adding the template in the user's documents
+        case 0:
+            rowsInSection = 1
+            
+        // Other sections show fields and values
+        default:
+            if FieldServices.hasMultipleFieldSections(fields: self.fields!) {
+                // Field keys are headers and their children are cells
+                let sectionFields = self.fields![section-self.sectionsBeforeFieldsSection].value as! [Field]
+                
+                rowsInSection = sectionFields.count
+            } else {
+                // Every field is a cell
+                rowsInSection = self.fields!.count
+            }
         }
         
-        if self.sectionCount() == 1 {
-            return valueFields.count
-        }
-        
-        guard let sectionFields = valueFields[section].value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(numberOfRowsInSection)")
-            return 0
-        }
-        
-        return sectionFields.count
+        return rowsInSection
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let section = indexPath.section
-        let row = indexPath.row
+        let cell: UITableViewCell
         
-        // Getting fields list from self.field.value
-        guard let fieldsList = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateFieldTableViewController.viewDidLoad()")
-            return UITableViewCell()
+        switch indexPath.section {
+            
+        // First section has a cell is for adding the template in the user's documents
+        case 0:
+            cell = CellFactory.addTemplateCell(tableView: tableView)
+            
+        // Other cells show fields and values
+        default:
+            // Shifting index path to discount sections before fields section
+            let fieldIndexPath = IndexPath(row: indexPath.row, section: indexPath.section - self.sectionsBeforeFieldsSection)
+            
+            // Getting field of cell on calculated index path
+            let cellField = FieldServices.getField(fields: self.fields!, cellForRowAt: fieldIndexPath)
+            
+            // Returning cell
+            cell = CellFactory.templateFieldCell(tableView: tableView, field: cellField)
+            
         }
         
-        // If number of sections is 1, then all fields of the field are gonna be cells
-        if self.sectionCount() == 1 {
-            let cellField = fieldsList[row]
-            
-            // Verifying which type of cell we need to cast
-            if cellField.type == "dict" {
-                let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
-                
-                cell.titleLabel.text = cellField.key
-                
-                return cell
-                
-            } else {
-                let cell = CellFactory.templateCell(tableView: tableView, type: .withDetail) as! TemplateDetailTableViewCell
-                
-                cell.titleLabel.text = cellField.key
-                cell.detailLabel.text = "-"
-                
-                return cell
-            }
-        }
-        
-        // Getting fields of the determined section
-        guard let sectionFields = fieldsList[section].value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ TemplateFieldTableViewController.tableView(cellForRowAt)")
-            return UITableViewCell()
-        }
-        
-        // Getting field of the determined cell
-        let cellField = sectionFields[row]
-        
-        // Verifying which type of cell we need to cast
-        if cellField.type == "dict" {
-            let cell = CellFactory.templateCell(tableView: tableView, type: .withDisclosure) as! TemplateDisclosureTableViewCell
-            
-            cell.titleLabel.text = cellField.key
-            
-            return cell
-            
-        } else {
-            let cell = CellFactory.templateCell(tableView: tableView, type: .withDetail) as! TemplateDetailTableViewCell
-            
-            cell.titleLabel.text = cellField.key
-            cell.detailLabel.text = "-"
-            
-            return cell
-        }
+        return cell
     }
     
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if self.sectionCount() == 1 {
-            return nil
-        }
-        
-        // Getting fields from self.field.value
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateFieldTableViewController.viewDidLoad()")
-            return nil
-        }
-        
-        return valueFields[section].key
-    }
+}
+
+
+// MARK: - Table view delegate
+extension TemplateFieldTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Deselecting the selected cell
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        let section = indexPath.section
-        let row = indexPath.row
-        
-        // Getting fields from self.field.value
-        guard let valueFields = self.field!.value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplateFieldTableViewController.viewDidLoad()")
+        switch indexPath.section {
+            
+        // First section has a cell is for adding the template in the user's documents
+        case 0:
+            // Adding template to user's documents
+            let template = TemplateServices.getTemplate(self)
+            TemplateServices.handleAddingTemplateToUserDocuments(template: template, viewController: self)
             return
-        }
-        
-        if self.sectionCount() == 1 {
-            if valueFields[row].type == "dict" {
-                self.goToTemplateFieldTableViewController(field: valueFields[row])
+            
+        // Other sections will display the fields of the document
+        default:
+            // Shifting index path to discount sections before fields section
+            let fieldIndexPath = IndexPath(row: indexPath.row, section: indexPath.section - self.sectionsBeforeFieldsSection)
+            
+            // Getting field of cell on calculated index path
+            let cellField = FieldServices.getField(fields: self.fields!, cellForRowAt: fieldIndexPath)
+            
+            switch cellField.type {
+                
+            // .dict: open cell's field view controller
+            case .dict:
+                self.goToTemplateFieldTableViewController(field: cellField)
+                
+            // .string: goes to add template button on top of the screen
+            case .string:
+                self.tableView.scrollToTop()
+                
             }
             
-            return
-        }
-        
-        guard let sectionFields = valueFields[section].value as? [Field] else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.tableView(didSelectRowAt)")
-            return
-        }
-        
-        let cellField = sectionFields[row]
-        
-        if cellField.type == "dict" {
-            self.goToTemplateFieldTableViewController(field: cellField)
         }
     }
     
 }
 
 
+// Handling segues and pushing view controllers
 extension TemplateFieldTableViewController {
+    
     /// Goes to selected field view controller
     func goToTemplateFieldTableViewController(field: Field) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let templateFieldVC = ViewControllerFactory.instantiateViewController(ofType: .templateField) as! TemplateFieldTableViewController
         
-        guard let templateFieldTableViewController = storyBoard.instantiateViewController(withIdentifier: "TemplateFieldTableViewController") as? TemplateFieldTableViewController else {
-            print("-> WARNING: EasyDocOfflineError.castingError @ TemplateTableViewController.goToTemplateContegoToTemplateFieldTableViewControllerntsViewController()")
-            return
-        }
+        templateFieldVC.fields = (field.value as! [Field])
+        templateFieldVC.navigationTitle = field.key
         
-        templateFieldTableViewController.field = field
-        templateFieldTableViewController.pathToSave = self.pathToSave! + "/" + field.key
-        
-        self.present(templateFieldTableViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(templateFieldVC, animated: true)
     }
+    
 }

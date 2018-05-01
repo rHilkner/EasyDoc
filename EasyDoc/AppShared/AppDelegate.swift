@@ -57,14 +57,14 @@ extension AppDelegate {
         
         // Veryfying if user is logged into EasyDoc's Firebase Server
         guard let user = Auth.auth().currentUser else {
-            self.setInitialViewController(withIdentifier: "LoginViewController")
+            self.setInitialViewController(ofType: .authNavigationController)
             return
         }
         
         // Trying to get user email
         guard let userEmail = user.email else {
             print("-> WARNING: EasyDocOfflineError.foundNil @ AppDelegate.checkUserAlreadyLoggedIn()")
-            self.setInitialViewController(withIdentifier: "LoginViewController")
+            self.setInitialViewController(ofType: .authNavigationController)
             return
         }
         
@@ -112,21 +112,22 @@ extension AppDelegate {
     func userIsLoggedIn(userEmail: String) {
         
         // Setting initial view controller as main screen
-        self.setInitialViewController(withIdentifier: "MainScreenViewController")
+        self.setInitialViewController(ofType: .mainTabBarController)
         
         // Loading user object from database
-        FetchingServices.loadMainUser(email: userEmail) {
+        AppShared.isLoadingUser.value = true
+        UserServices.loadMainUser(email: userEmail) {
             (fetchingError) in
             
             // Handling error
             if fetchingError != nil {
-                print("-> WARNING: EasyDocQueryError.loadMainUser @ AppDelegate.checkUserAlreadyLoggedIn()")
+                print("-> WARNING: EasyDocQueryError.loadMainUser @ AppDelegate.userIsLoggedIn()")
                 
                 AuthServices.attemptToLogout() {
                     (logoutError) in
                     
                     if logoutError != nil {
-                        print("-> WARNING: EasyDocQueryError.logoutError @ AppDelegate.checkUserAlreadyLoggedIn()")
+                        print("-> WARNING: EasyDocQueryError.logoutError @ AppDelegate.userIsLoggedIn()")
                     }
                 }
             }
@@ -135,12 +136,10 @@ extension AppDelegate {
     
     
     /// Sets initial controller with given identifier.
-    func setInitialViewController(withIdentifier identifier: String) {
+    func setInitialViewController(ofType type: ViewControllerType) {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: identifier)
+        let initialViewController = ViewControllerFactory.instantiateViewController(ofType: type)
         
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()

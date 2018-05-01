@@ -9,77 +9,130 @@
 import UIKit
 
 class TemplatesViewController: UIViewController {
-    
+
     @IBOutlet weak var tableView: UITableView!
     
     var templates: [Template] = []
     var loadingIndicatorAlert: UIAlertController?
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Setting table view
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+
+        // Loading templates from database into AppShared.templates
+        AppShared.isLoadingTemplates.value = true
+        TemplateServices.loadTemplates() {
+            loadingError in
+
+            if let error = loadingError {
+                // TODO: retry or show "no connection" alert
+                print(error.localizedDescription)
+            }
+        }
     }
     
-    
+
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Verifying if templates object is still being loaded
+        // Verifying if templates aren't still loading
         if AppShared.isLoadingTemplates.value {
             AppShared.isLoadingTemplates.delegate = self
             self.presentLoadingIndicator()
             return
         }
-        
-        // Loading view controller
-        self.loadViewController()
+
+        // Loading table view contents
+        self.loadTableViewContents()
+        self.tableView.reloadData()
     }
-    
-    
+
+
+    /// Loads content of the view controller
+    func loadTableViewContents() {
+
+        // Verifying if templates object exists
+        guard let templates = AppShared.templates else {
+
+            // Verifying if templates aren't still loading
+            if AppShared.isLoadingTemplates.value {
+                return
+            }
+
+            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplatesViewController.loadTableViewContents()")
+
+            // Loading templates from database into AppShared.templates
+            AppShared.isLoadingTemplates.value = true
+            TemplateServices.loadTemplates() {
+                loadingError in
+
+                if let error = loadingError {
+                    // TODO: retry or show "no connection" alert
+                    print(error.localizedDescription)
+                }
+            }
+            return
+        }
+
+        self.templates = templates
+    }
+
+
     override func viewWillDisappear(_ animated: Bool) {
         // If self is delegate of isLoadingUser, then make it nil
         if AppShared.isLoadingTemplates.delegate != nil {
             AppShared.isLoadingTemplates.delegate = nil
         }
     }
-    
 
-    /// Loads content of the view controller
-    func loadViewController() {
-        // Getting templates object
-        guard let temp = AppShared.templates else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ TemplatesViewController.loadViewController()")
-                
-            // Reloading templates object completely
-            FetchingServices.loadTemplates() {
-                (fetchingError) in
-                
-                // Performing logout in case of error - except if connection lost
-                if let error = fetchingError {
-                    // TODO: perform logout
-                    print(error.errorDescription)
-                    return
-                }
-                
-                self.loadViewController()
-            }
-            
-            return
-        }
-        
-        // Getting templates
-        self.templates = temp
-        
-        // Setting table view
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
-        self.tableView.reloadData()
+}
+
+
+extension TemplatesViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.templates.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // Creating table view cell
+        return CellFactory.templateCell(tableView: tableView, title: self.templates[indexPath.row].type)
+        
+    }
+    
+}
+
+
+// MARK: - Table view delegate
+extension TemplatesViewController {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        
+        let row = indexPath.row
+        self.goToTemplateViewController(template: self.templates[row])
+    }
+    
+}
+
+
+// Handling segues and pushing view controllers
+extension TemplatesViewController {
     
     /// Goes to given document view controller
     func goToTemplateViewController(template: Template) {
-        performSegue(withIdentifier: "TemplateSegue", sender: template)
+        performSegue(withIdentifier: SegueIds.template.rawValue, sender: template)
     }
     
     
@@ -87,7 +140,7 @@ class TemplatesViewController: UIViewController {
         if let identifier = segue.identifier {
             
             switch identifier {
-            
+                
             case "TemplateSegue":
                 guard let template = sender as? Template else {
                     print("-> WARNING: EasyDocOfflineError.castingError @ TemplatesViewController.prepare(for segue) -1")
@@ -108,60 +161,22 @@ class TemplatesViewController: UIViewController {
             
         }
     }
+    
 }
 
-extension TemplatesViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.templates.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "TemplateCell", for: indexPath) as? TemplateTableViewCell else {
-            print(EasyDocOfflineError.castingError.errorDescription)
-            return UITableViewCell()
-        }
-        
-        let row = indexPath.row
-        cell.titleLabel.text = self.templates[row].type
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        // Choose custom row height
-        return 80
-    }
-}
 
-extension TemplatesViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        
-        let row = indexPath.row
-        self.goToTemplateViewController(template: self.templates[row])
-    }
-}
-
+// Handling loading indicator
 extension TemplatesViewController: IsLoadingTemplatesDelegate {
     /// Called when user session loading has ended
     func loadingEnded() {
-        self.loadViewController()
+        self.loadTableViewContents()
+        self.tableView.reloadData()
         self.dismissLoadingIndicator()
     }
     
     
     /// Presents view with loading indicator
     func presentLoadingIndicator() {
-        
         // Creating alert
         self.loadingIndicatorAlert = UIAlertController(title: nil, message: "Carregando...", preferredStyle: .alert)
         
@@ -183,8 +198,9 @@ extension TemplatesViewController: IsLoadingTemplatesDelegate {
         
         // Dismissing loading indicator
         if self.loadingIndicatorAlert != nil {
-            self.loadingIndicatorAlert!.dismiss(animated: false, completion: nil)
+            self.loadingIndicatorAlert!.dismiss(animated: true, completion: nil)
             self.loadingIndicatorAlert = nil
         }
     }
+    
 }

@@ -12,7 +12,7 @@ class MainUser {
     var autoID: String
     var email: String
     var documents: [Document]
-    
+
     init(autoID: String, email: String, documents: [Document]) {
         self.autoID = autoID
         self.email = email

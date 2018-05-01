@@ -16,30 +16,71 @@ class DocumentsViewController: UIViewController {
     
     var documents: [Document] = []
     var loadingIndicatorAlert: UIAlertController?
-    
-    
+
+
     override func viewDidLoad() {
-        super.viewDidLoad()
+
+        // Setting table view
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
-    
-    
+
+
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         // Uncomment lines below to send all templates in UploadTemplatesServices to EasyDoc's Firebase Database
         //        UploadTemplatesServices.sendAllTemplatesToDB()
         //        return
-        
-        
+
         // Verifying if user object is still being loaded
         if AppShared.isLoadingUser.value {
             AppShared.isLoadingUser.delegate = self
             self.presentLoadingIndicator()
             return
         }
-        
-        // Loading view controller
-        self.loadViewController()
+
+        // Loading table view contents
+        self.loadTableViewContents()
+        self.tableView.reloadData()
+    }
+
+
+    /// Loads content of the view controller
+    func loadTableViewContents() {
+        // Verifying if user's documents object exists
+        guard let documents = AppShared.mainUser?.documents else {
+
+            // Verifying if user is still being loaded
+            if AppShared.isLoadingUser.value {
+                return
+            }
+            
+            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentsViewController.loadViewController()")
+
+            // Reloading main user object completely
+            UserServices.reloadMainUser() {
+                (fetchingError) in
+
+                // Showing error if needed
+                if let error = fetchingError {
+                    print(error.description)
+                    // TODO: show "no connection" alert
+                    return
+                }
+
+                self.loadTableViewContents()
+            }
+
+            return
+        }
+
+        // Getting user's documents
+        self.documents = documents
+
+        if self.documents.count == 0 {
+            self.noDocumentsDisclaimer.isHidden = false
+        } else {
+            self.noDocumentsDisclaimer.isHidden = true
+        }
     }
     
     
@@ -49,51 +90,105 @@ class DocumentsViewController: UIViewController {
            AppShared.isLoadingUser.delegate = nil
         }
     }
-    
-    
-    /// Loads content of the view controller
-    func loadViewController() {
-        // Getting user object
-        guard let mainUser = AppShared.mainUser else {
-            print("-> WARNING: EasyDocOfflineError.foundNil @ DocumentsViewController.loadViewController()")
-            
-            // Reloading main user object completely
-            FetchingServices.reloadMainUser() {
-                (fetchingError) in
-                
-                // Performing logout in case of error - except if connection lost
-                if let error = fetchingError {
-                    // TODO: perform logout
-                    print(error.errorDescription)
-                    return
-                }
-                
-                self.loadViewController()
-            }
-            
-            return
-        }
-        
-        // Getting user's documents
-        self.documents = mainUser.documents
-        
-        if self.documents.count == 0 {
-            self.noDocumentsDisclaimer.isHidden = false
+
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+
+        if !self.tableView.isEditing {
+            self.tableView.setEditing(true, animated: true)
+            self.navigationItem.leftBarButtonItem?.title = "OK"
         } else {
-            self.noDocumentsDisclaimer.isHidden = true
+            self.tableView.setEditing(false, animated: true)
+            self.navigationItem.leftBarButtonItem?.title = "Editar"
         }
-        
-        // Setting table view
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
-        self.tableView.reloadData()
+    }
+    
+}
+
+
+extension DocumentsViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
     
     
+    // Makes all cells editable
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+    /// Returns number os sections of the table view
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    /// Returns number of cells in table view
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.documents.count
+    }
+    
+    
+    /// Populates table view with cells
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let row = indexPath.row
+        
+        let cell = CellFactory.documentCell(tableView: tableView, title: self.documents[row].title, lastModified: self.documents[row].lastModified.toString())
+        
+        return cell
+    }
+    
+}
+
+
+// MARK: - Table view delegate
+extension DocumentsViewController: UITableViewDelegate {
+    
+    /// Performs actions when a table view cell is selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        
+        let row = indexPath.row
+        self.goToDocumentViewController(document: self.documents[row])
+    }
+    
+    
+    // Handles editing of documents such as "delete"
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            DocumentServices.deleteDocument(self.documents[indexPath.row]) {
+                error in
+                
+                if error != nil {
+                    print("-> WARNING: EasyDocQueryError.removeValue @ DocumentsViewController.tableView()")
+                    self.handleUnsuccessfullDelete()
+                    return
+                }
+                
+                self.loadTableViewContents()
+                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.bottom)
+            }
+        }
+    }
+    
+}
+
+
+// Editing table view
+extension DocumentsViewController {
+    
+}
+
+
+// Dealing with segues
+extension DocumentsViewController {
+    
     /// Goes to given document view controller
     func goToDocumentViewController(document: Document) {
-        performSegue(withIdentifier: "DocumentSegue", sender: document)
+        performSegue(withIdentifier: SegueIds.document.rawValue, sender: document)
     }
     
     
@@ -102,7 +197,7 @@ class DocumentsViewController: UIViewController {
             
             switch identifier {
                 
-            case "DocumentSegue":
+            case SegueIds.document.rawValue:
                 guard let document = sender as? Document else {
                     print("-> WARNING: EasyDocOfflineError.castingError @ DocumentsViewController.prepare(for segue)")
                     return
@@ -121,86 +216,23 @@ class DocumentsViewController: UIViewController {
             }
         }
     }
-}
-
-extension DocumentsViewController: UITableViewDataSource {
     
-    /// Returns number os sections of the table view
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    
+    /// Called when a template is added to the user's documents
+    @IBAction func unwindFromTemplateTableViewController(_ sender: UIStoryboardSegue) {
+        self.tableView.scrollToTop()
     }
     
-    
-    /// Returns number of cells in table view
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.documents.count
-    }
-    
-    
-    /// Populates table view with cells
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Creating cell with identifier
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath) as? DocumentTableViewCell else {
-            print(EasyDocOfflineError.castingError.errorDescription)
-            return UITableViewCell()
-        }
-        
-        // Populating cell
-        let row = indexPath.row
-        cell.titleLabel.text = self.documents[row].title
-        cell.lastModifiedLabel.text = self.documents[row].lastModified.toString()
-        
-        return cell
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //Choose custom row height
-        return 80
-    }
-    
-    
-    // Makes all cells editable
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    
-    // Handling options of cell swipe
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            DocumentServices.deleteDocument(autoID: self.documents[indexPath.row].autoID!) {
-                error in
-                
-                if error != nil {
-                    print("-> WARNING: EasyDocQueryError.removeValue @ DocumentsViewController.tableView()")
-                    self.handleUnsuccessfullDelete()
-                    return
-                }
-                
-                self.loadViewController()
-            }
-        }
-    }
-}
-    
-extension DocumentsViewController: UITableViewDelegate {
-    
-    /// Performs actions when a table view cell is selected
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        
-        let row = indexPath.row
-        self.goToDocumentViewController(document: self.documents[row])
-    }
 }
 
 
+// Handling user loading
 extension DocumentsViewController: IsLoadingUserDelegate {
     
     /// Called when user session loading has ended
     func loadingEnded() {
-        self.loadViewController()
+        self.loadTableViewContents()
+        self.tableView.reloadData()
         self.dismissLoadingIndicator()
     }
     
@@ -237,6 +269,7 @@ extension DocumentsViewController: IsLoadingUserDelegate {
 }
 
 
+// Handling errors
 extension DocumentsViewController {
     
     /// Called when deleting a documents returns an error. Presents an alert to inform the user the deletion was unsuccessful.

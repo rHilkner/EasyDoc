@@ -44,8 +44,8 @@ public enum EasyDocAuthError: EasyDocError {
     case logoutUnsuccessful
 }
 
-extension EasyDocAuthError: LocalizedError {
-    public var errorDescription: String {
+extension EasyDocAuthError {
+    public var description: String {
         switch self {
         case .userNotFound:
             return NSLocalizedString("User account was not found on database.", comment: "")

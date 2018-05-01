@@ -9,6 +9,7 @@
 import Foundation
 
 class Document {
+    /// Note: AutoID is only nil at the first time the document is created (because it needs to wait the return of the server with the AutoID string)
     var autoID: String?
     var title: String
     var template: Template
@@ -21,4 +22,14 @@ class Document {
         self.lastModified = lastModified
     }
     
+}
+
+extension Document: Equatable {
+    static func == (lhs: Document, rhs: Document) -> Bool {
+        if lhs.autoID == rhs.autoID {
+            return true
+        }
+        
+        return false
+    }
 }
