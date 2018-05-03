@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="IZo-ea-v4q">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="502"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DocumentCell" rowHeight="80" id="Jco-au-ZSE" customClass="DocumentTableViewCell" customModule="EasyDoc" customModuleProvider="target">
@@ -94,7 +94,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQa-Id-LZE">
-                                <rect key="frame" x="89.5" y="251" width="197" height="49"/>
+                                <rect key="frame" x="89.5" y="226.5" width="197" height="49"/>
                                 <string key="text">Você ainda não criou
 nenhum documento.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
@@ -336,8 +336,9 @@ nenhum documento.</string>
         <scene sceneID="93b-H1-S1U">
             <objects>
                 <navigationController storyboardIdentifier="DocumentsNavigationController" title="Documentos Navigation" automaticallyAdjustsScrollViewInsets="NO" id="Tps-b0-73H" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Documentos" image="Tab Bar Doc Icon" id="xnv-ve-H0p"/>
+                    <tabBarItem key="tabBarItem" title="Documentos" image="Tab Bar Doc Icon" id="jEQ-Nj-8OJ"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="L00-a1-Le2">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>

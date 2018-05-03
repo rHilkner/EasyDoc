@@ -33,7 +33,7 @@
         <scene sceneID="IS8-9L-V6l">
             <objects>
                 <viewControllerPlaceholder storyboardName="Documents" referencedIdentifier="DocumentsNavigationController" id="avU-F3-xMp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="spr-AZ-Hoe"/>
+                    <tabBarItem key="tabBarItem" title="Documentos" image="Tab Bar Doc Icon" id="spr-AZ-Hoe"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9H9-e6-xJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -43,7 +43,7 @@
         <scene sceneID="FfS-OA-Fr2">
             <objects>
                 <viewControllerPlaceholder storyboardName="Templates" referencedIdentifier="TemplatesNavigationController" id="7HN-xK-E99" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="aMs-Gi-J5q"/>
+                    <tabBarItem key="tabBarItem" title="Templates" image="Tab Bar Doc Icon" id="aMs-Gi-J5q"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMN-dP-50A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,12 +52,16 @@
         <!--SettingsNavigationController-->
         <scene sceneID="xEQ-0L-2sb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N5q-Rl-Yuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsNavigationController" id="kpt-CO-lFU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="sCU-HA-oJt"/>
+                    <tabBarItem key="tabBarItem" title="Configurações" image="Tab Bar Settings Icon" id="sCU-HA-oJt"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N5q-Rl-Yuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="543" y="1393"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Tab Bar Doc Icon" width="21" height="26"/>
+        <image name="Tab Bar Settings Icon" width="25" height="25"/>
+    </resources>
 </document>

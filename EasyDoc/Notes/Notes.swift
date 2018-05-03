@@ -11,21 +11,14 @@
  DESCRIPTION
  
  O EasyDoc é uma plataforma para organização e máxima otimização na geração de contratos, acordos e documentos. Na nossa versão beta para iOS o usuário pode adicionar algum dos contratos de nosso acervo aos seus documentos e através do preenchimento de campos de texto específicos sobre os dados do contrato (partes, valores, datas, etc.) nosso sistema apresenta o contrato totalmente preenchido para o usuário.
-
-
- FDS
-    - Bolar descritivo do fluxo do EasyDoc Web, revisar com o Renato e depois falar com os designers
-    - Fazer TODO CHATO (vai sobrar só novas funcionalidades o/)
-    - Barras de busca
-
  
  BUGS
-    - Item dos templates simplesmente nao aparece na tab bar
     - Consertar Unwind Segue (popar pro root, depois mudar de view na tab bar)
     - Se logout+login 2x -> DocumentViewController fica sem título O.o
     - Memory leak após logout/login
  
  TODO CHATO
+    - Bolar descritivo do fluxo do EasyDoc Web, revisar com o Renato e depois falar com os designers
     - Documentação
     - Acabar com a variável global dos templates e main user (aprender a salvá-los no user defaults)
  

@@ -52,12 +52,12 @@ class TemplatePersistence {
             
             // Return templates fetched
             completionHandler(templates, nil)
-        }) {
+        }, withCancel: {
             error in
             
             print("-> WARNING: EasyDocQueryError.observeValue @ DatabaseManager.fetchTemplates()")
             completionHandler(nil, EasyDocQueryError.observeValue)
-        }
+        })
     }
     
 }

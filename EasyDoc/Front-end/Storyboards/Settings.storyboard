@@ -12,8 +12,9 @@
         <scene sceneID="yTr-cN-5Mk">
             <objects>
                 <navigationController storyboardIdentifier="SettingsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="vDD-jY-F7h" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Configurações" image="Tab Bar Settings Icon" id="DOf-64-8w0"/>
+                    <tabBarItem key="tabBarItem" title="Configurações" image="Tab Bar Settings Icon" id="jnJ-Za-tFh"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="Fap-yJ-2mP">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
