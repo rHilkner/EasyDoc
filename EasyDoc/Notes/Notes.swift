@@ -18,7 +18,7 @@
     - Memory leak após logout/login
  
  TODO CHATO
-    - Bolar descritivo do fluxo do EasyDoc Web, revisar com o Renato e depois falar com os designers
+    - Bolar descritivo do fluxo do EasyDoc Web, revisar com o Renato e depois falar com os designers 
     - Documentação
     - Acabar com a variável global dos templates e main user (aprender a salvá-los no user defaults)
  
